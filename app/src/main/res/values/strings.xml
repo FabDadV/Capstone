@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Drinks</string>
+    <string name="app_name">HomeCoctails</string>
     <string name="tv_id">N1</string>
     <string name="tv_name">Very delicious drink</string>
     <string name="tv_thumb">thumb</string>
