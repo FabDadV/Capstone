@@ -38,10 +38,10 @@ public class ListFragment extends Fragment {
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         final ListViewModel viewModel = ViewModelProviders.of(this).get(ListViewModel.class);
-        // Add an observer on the LiveData returned by getList.
+        // Add an observer on the LiveData returned by getListLiveData.
         // The onChanged() method fires when the observed data changes
         Log.d("TAG", "observe");
-        viewModel.getList().observe(this, new Observer<List<Drink>>() {
+        viewModel.getListLiveData().observe(this, new Observer<List<Drink>>() {
             @Override
             public void onChanged(@Nullable final List<Drink> drinks) {
                 // Update the cached copy of the drinks in the adapter.

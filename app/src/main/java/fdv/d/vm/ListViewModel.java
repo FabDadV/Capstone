@@ -26,17 +26,17 @@ public class ListViewModel extends AndroidViewModel {
         queryApi = ApiBuilder.getApi().create(QueryApi.class);
     }
 
-    public LiveData<List<Drink>> getList() {
+    public LiveData<List<Drink>> getListLiveData() {
         if (listLiveData == null) {
             listLiveData = new MutableLiveData<>();
 
-            queryApi.getData("Optional_Alcohol").enqueue(new Callback<DrinksList>() {
+            queryApi.loadData("Optional_Alcohol").enqueue(new Callback<DrinksList>() {
                 @Override
                 public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                     //Данные успешно пришли, но надо проверить response.body() на null
                     if (response.isSuccessful()) {
                         Log.d("TAG", "API is Successful");
-                        listLiveData.setValue(response.body().getDrinks());
+                        listLiveData.setValue(response.body().getList());
                     } else {
                         Log.e("TAG", "response code " + response.code());
                     }

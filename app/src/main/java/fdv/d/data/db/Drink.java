@@ -1,10 +1,13 @@
 package fdv.d.data.db;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity(tableName = "tab_drinks")
 public class Drink {
-/*
     @PrimaryKey
     private int id;
-*/
+
     private String idDrink;
     private String strDrink;
     private String strDrinkThumb;
