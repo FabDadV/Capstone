@@ -23,9 +23,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     /* Creates a RecyclerViewAdapter.
      * @param itemClickListener The on-click handler for this adapter. This single handler is called when an item is clicked.
      */
-    public ListAdapter(Context context, ItemClickListener listener, List<Drink> list) {
+    public ListAdapter(ItemClickListener listener, List<Drink> list) {
 //    public ListAdapter(Context context, List<Drink> list) {
-        this.context = context;
+//        this.context = context;
         this.itemClickListener = listener;
         this.list = list;
     }

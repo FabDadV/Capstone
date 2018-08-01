@@ -5,19 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/bon_appetit" />
+
     <TextView
         android:id="@+id/tv_id_drink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/big_margin"
         android:textSize="@dimen/text_size"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
         android:text="@string/tv_id"/>
 
     <TextView
         android:id="@+id/tv_drink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_marging"
+        android:layout_margin="@dimen/big_margin"
         app:layout_constraintStart_toEndOf="@+id/tv_id_drink"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
         android:textSize="@dimen/text_size"
         android:text="@string/tv_name"/>
 

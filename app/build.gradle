@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     // Material design (FAB, AppBar ...) dependencies
     implementation 'com.android.support:design:27.1.1'
@@ -36,6 +36,8 @@ dependencies {
     // Add Retrofit2 & Gson-Converter dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    // Add Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
     // for easy DB debugging
     implementation 'com.facebook.stetho:stetho:1.5.0'
     // Testing

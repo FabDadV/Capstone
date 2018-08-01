@@ -44,7 +44,7 @@ public class ListFragment extends Fragment implements ItemClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setHasFixedSize(true);
 
-        adapter = new ListAdapter(context, this, list);
+        adapter = new ListAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
         // Get a new or existing ViewModel from the ViewModelProvider.
