@@ -1,6 +1,8 @@
 package fdv.d.ui;
 
 import java.util.List;
+
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,18 +13,50 @@ import android.widget.TextView;
 import fdv.d.R;
 import fdv.d.data.db.Drink;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
     private List<Drink> list;
+    private Context context;
+    // An on-click handler that we've defined to make it easy for an Activity to interface with our RecyclerView
+    private ItemClickListener itemClickListener;
+    // The interface that receives onClick messages.
+    public interface ItemClickListener {void onItemClickListener(String itemId, String itemName);}
+    /* Creates a RecyclerViewAdapter.
+     * @param itemClickListener The on-click handler for this adapter. This single handler is called when an item is clicked.
+     */
+    public ListAdapter(Context context, ItemClickListener listener, List<Drink> list) {
+//    public ListAdapter(Context context, List<Drink> list) {
+        this.context = context;
+        this.itemClickListener = listener;
+        this.list = list;
+    }
 
-    public ListAdapter(List<Drink> list) { this.list = list; };
-
-   @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        return new ViewHolder(v);
+    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView id;
+        TextView name;
+        TextView thumb;
+        public ListViewHolder(View itemView) {
+            super(itemView);
+            id = itemView.findViewById(R.id.tv_id);
+            name = itemView.findViewById(R.id.tv_name);
+            thumb = itemView.findViewById(R.id.tv_thumb);
+            itemView.setOnClickListener(this);
+        }
+        // This gets called by the child views during a click. @param v - the View that was clicked
+        @Override
+        public void onClick(View view) {
+            String itemId = list.get(getAdapterPosition()).getId();
+            String itemName = list.get(getAdapterPosition()).getName();
+            itemClickListener.onItemClickListener(itemId, itemName);
+        }
     }
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item, parent, false);
+        return new ListViewHolder(view);
+    }
+    @Override
+    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Drink drink = list.get(position);
         holder.id.setText(drink.getId());
         holder.name.setText(drink.getName());
@@ -30,19 +64,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
     @Override
     public int getItemCount() {
-        if (list == null)
-            return 0;
+        if (list == null) return 0;
         return list.size();
     }
-    class ViewHolder extends RecyclerView.ViewHolder {
-        TextView id;
-        TextView name;
-        TextView thumb;
-        ViewHolder(View itemView) {
-            super(itemView);
-            id = itemView.findViewById(R.id.tv_id);
-            name = itemView.findViewById(R.id.tv_name);
-            thumb = itemView.findViewById(R.id.tv_thumb);
-        }
+
+    public List<Drink> getDrinks() {return list;}
+
+    public void setDrinks(List<Drink> drinks) {
+        list = drinks;
+        notifyDataSetChanged();
     }
 }

@@ -12,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static fdv.d.data.api.ApiBuilder.DRINK_TYPE;
 import fdv.d.data.api.ApiBuilder;
 import fdv.d.data.api.DrinksList;
 import fdv.d.data.api.QueryApi;
@@ -30,7 +31,8 @@ public class ListViewModel extends AndroidViewModel {
         if (listLiveData == null) {
             listLiveData = new MutableLiveData<>();
 
-            queryApi.loadData("Optional_Alcohol").enqueue(new Callback<DrinksList>() {
+        // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
+            queryApi.loadData(DRINK_TYPE).enqueue(new Callback<DrinksList>() {
                 @Override
                 public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                     //Данные успешно пришли, но надо проверить response.body() на null
