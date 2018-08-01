@@ -7,5 +7,5 @@ import retrofit2.http.Query;
 public interface QueryApi {
     // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
     @GET("filter.php")
-    Call<DrinksList> getData(@Query("a") String drinkType);
+    Call<DrinksList> loadData(@Query("a") String drinkType);
 }
