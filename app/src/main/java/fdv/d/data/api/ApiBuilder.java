@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiBuilder {
     // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic Non_Alcoholic Optional_Alcohol
     private static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/";
-    public static final String DRINK_TYPE = "Non_Alcoholic";
+    public static final String DRINK_TYPE = "Optional_Alcohol";
     private static Retrofit retrofit = null;
 
     private ApiBuilder() { }
