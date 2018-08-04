@@ -11,24 +11,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import com.squareup.picasso.Picasso;
 
 import fdv.d.App;
 import fdv.d.R;
-import fdv.d.data.api.ApiBuilder;
 import fdv.d.data.db.Drink;
-import fdv.d.vm.ListViewModel;
-import fdv.d.data.api.QueryApi;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import fdv.d.data.api.DrinksList;
 
 public class DetailFragment extends Fragment {
-//    public static final String BASE_URL = "https://"
     public static final String EXTRA_ID_DRINK = "id_drink";
-    public static final String EXTRA_NAME = "name";
-    private QueryApi queryApi;
-    private Drink drink;
+    public static final String EXTRA_PATH = "path_drink";
+    private TextView tvDrink;
+    private TextView tvCategory;
+    private TextView tvInstruction;
 
     public DetailFragment() { }
 
@@ -39,45 +37,39 @@ public class DetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.detail_fragment, container, false);
 
+        ImageView drinkView = view.findViewById(R.id.iv_drink);
         TextView tvIdDrink = view.findViewById(R.id.tv_id_drink);
-        TextView tvDrink = view.findViewById(R.id.tv_drink);
-        ImageView imageView = view.findViewById(R.id.imageView);
-        String name = getActivity().getIntent().getStringExtra(EXTRA_NAME);
-        String id_drink = getActivity().getIntent().getStringExtra(EXTRA_ID_DRINK);
-        drink = new Drink();
+        tvDrink = view.findViewById(R.id.tv_drink);
+        tvCategory = view.findViewById(R.id.tv_cat);
+        tvInstruction = view.findViewById(R.id.tv_text);
 
-        queryApi = ApiBuilder.getApi().create(QueryApi.class);
-        queryApi.loadById(id_drink).enqueue(new Callback<Drink>() {
+        String id_drink = getActivity().getIntent().getStringExtra(EXTRA_ID_DRINK);
+        String path_drink = getActivity().getIntent().getStringExtra(EXTRA_PATH);
+// https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
+        App.getApi().loadById(id_drink).enqueue(new Callback<DrinksList>() {
             @Override
-            public void onResponse(Call<Drink> call, Response<Drink> response) {
+            public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                 if (response.isSuccessful()) {
-                    Log.d("API_ID"," is Successful");
-                    drink.setName(response.body().getName());
-                    drink.setThumb(response.body().getThumb());
+                    Log.d("API_ID"," is Ok");
+                    Drink drink = response.body().getList().get(0);
+                    tvDrink.setText(drink.getName());
+                    tvCategory.setText(drink.getStrCategory());
+                    tvInstruction.setText(drink.getStrInstructions());
                 } else {
                     Log.e("API", "response code " + response.code());
                 }
             }
             @Override
-            public void onFailure(Call<Drink> call, Throwable t) {
+            public void onFailure(Call<DrinksList> call, Throwable t) {
                 Log.e("API_ID", "Error: " + t.toString());
             }
         });
-        String thumpURL = "https://www.thecocktaildb.com/images/media/drink/wpxpvu1439905379.jpg";
-        Picasso.get()
-                .load(thumpURL)
-                .error(R.drawable.bon_appetit)
-                .into(imageView);
         tvIdDrink.setText(id_drink);
-        tvDrink.setText(name);
-/*
-        String posterUrl = BASE_URL + thumbDrink;
         Picasso.get()
-                .load(drink.getThumb())
-                .placeholder(R.drawable.bon_appetit)
-                .error(R.drawable.bon_appetit)
-                .into(ivPoster);
-*/
+                .load(path_drink)
+                .placeholder(R.drawable.no_drink)
+                .error(R.drawable.err_drink)
+                .into(drinkView);
         return view;
     }
 }

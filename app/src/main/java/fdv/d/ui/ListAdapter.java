@@ -8,7 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import fdv.d.R;
 import fdv.d.data.db.Drink;
@@ -19,7 +22,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     // An on-click handler that we've defined to make it easy for an Activity to interface with our RecyclerView
     private ItemClickListener itemClickListener;
     // The interface that receives onClick messages.
-    public interface ItemClickListener {void onItemClickListener(String itemId, String itemName);}
+    public interface ItemClickListener {void onItemClickListener(String itemId, String itemPath);}
     /* Creates a RecyclerViewAdapter.
      * @param itemClickListener The on-click handler for this adapter. This single handler is called when an item is clicked.
      */
@@ -33,20 +36,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView id;
         TextView name;
-        TextView thumb;
+        ImageView thumb;
+
         public ListViewHolder(View itemView) {
             super(itemView);
             id = itemView.findViewById(R.id.tv_id);
             name = itemView.findViewById(R.id.tv_name);
-            thumb = itemView.findViewById(R.id.tv_thumb);
+            thumb = itemView.findViewById(R.id.imageView);
             itemView.setOnClickListener(this);
         }
         // This gets called by the child views during a click. @param v - the View that was clicked
         @Override
         public void onClick(View view) {
             String itemId = list.get(getAdapterPosition()).getId();
-            String itemName = list.get(getAdapterPosition()).getName();
-            itemClickListener.onItemClickListener(itemId, itemName);
+            String itemPath = list.get(getAdapterPosition()).getStrDrinkThumb();
+            itemClickListener.onItemClickListener(itemId, itemPath);
         }
     }
     @Override
@@ -60,7 +64,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         Drink drink = list.get(position);
         holder.id.setText(drink.getId());
         holder.name.setText(drink.getName());
-        holder.thumb.setText(drink.getThumb());
+        Picasso.get()
+                .load(drink.getStrDrinkThumb())
+                .error(R.drawable.err_drink)
+                .into(holder.thumb);
     }
     @Override
     public int getItemCount() {

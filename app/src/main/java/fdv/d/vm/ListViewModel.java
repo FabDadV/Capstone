@@ -8,23 +8,23 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import fdv.d.App;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static fdv.d.data.api.ApiBuilder.DRINK_TYPE;
-import fdv.d.data.api.ApiBuilder;
 import fdv.d.data.api.DrinksList;
 import fdv.d.data.api.QueryApi;
 import fdv.d.data.db.Drink;
 
 public class ListViewModel extends AndroidViewModel {
+// https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
+    public static final String DRINK_TYPE = "Optional_Alcohol";
     private MutableLiveData<List<Drink>> listLiveData;
     private QueryApi queryApi;
 
     public ListViewModel(@NonNull Application application) {
         super(application);
-        queryApi = ApiBuilder.getApi().create(QueryApi.class);
     }
 
     public LiveData<List<Drink>> getListLiveData() {
@@ -32,7 +32,7 @@ public class ListViewModel extends AndroidViewModel {
             listLiveData = new MutableLiveData<>();
 
         // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
-            queryApi.loadData(DRINK_TYPE).enqueue(new Callback<DrinksList>() {
+            App.getApi().loadData(DRINK_TYPE).enqueue(new Callback<DrinksList>() {
                 @Override
                 public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                     //Данные успешно пришли, но надо проверить response.body() на null

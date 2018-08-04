@@ -3,13 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_drink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/bon_appetit" />
+        app:srcCompat="@drawable/no_drink" />
 
     <TextView
         android:id="@+id/tv_id_drink"
@@ -17,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/big_margin"
         android:textSize="@dimen/text_size"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/iv_drink"
         android:text="@string/tv_id"/>
 
     <TextView
@@ -26,8 +27,20 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/big_margin"
         app:layout_constraintStart_toEndOf="@+id/tv_id_drink"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/iv_drink"
         android:textSize="@dimen/text_size"
         android:text="@string/tv_name"/>
+
+    <TextView
+        android:id="@+id/tv_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_drink"/>
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_cat"/>
 
 </android.support.constraint.ConstraintLayout>

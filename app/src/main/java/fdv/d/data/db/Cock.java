@@ -26,9 +26,8 @@ public class Cock {
     public String getName() { return strDrink; }
     /* @param strDrink */
     public void setName(String strDrink) { this.strDrink = strDrink; }
-    /* @return Site description */
-    public String getThumb() { return strDrinkThumb; }
-    /* @param desc Site description */
-    public void setThumb(String strDrinkThumb) { this.strDrinkThumb = strDrinkThumb; }
+
+    public String getStrDrinkThumb() {return strDrinkThumb;}
+    public void setStrDrinkThumb(String strDrinkThumb) {this.strDrinkThumb = strDrinkThumb;}
 }
 

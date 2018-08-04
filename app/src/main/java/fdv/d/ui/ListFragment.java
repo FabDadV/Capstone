@@ -22,7 +22,7 @@ import fdv.d.data.db.Drink;
 import fdv.d.vm.ListViewModel;
 
 import static fdv.d.ui.DetailFragment.EXTRA_ID_DRINK;
-import static fdv.d.ui.DetailFragment.EXTRA_NAME;
+import static fdv.d.ui.DetailFragment.EXTRA_PATH;
 
 public class ListFragment extends Fragment implements ItemClickListener {
     private ListViewModel viewModel;
@@ -58,7 +58,7 @@ public class ListFragment extends Fragment implements ItemClickListener {
                 // Update the cached copy of the drinks in the adapter.
                 if(list == null) {
                     list = drinks;
-                    Log.d("TAG", "adapter");
+                    Log.d("TAG", "adapter set Drinks");
                     adapter.setDrinks(list);
                 } else {
                     list = drinks;
@@ -66,17 +66,16 @@ public class ListFragment extends Fragment implements ItemClickListener {
                 }
             }
         });
-
         return view;
     }
     // Override method in order to handle RecyclerView item clicks.
     @Override
-    public void onItemClickListener(String idDrink, String nameDrink) {
-        Log.d("TAG","Item: " + idDrink + nameDrink);
+    public void onItemClickListener(String idDrink, String pathDrink) {
+        Log.d("TAG","Item: " + idDrink + pathDrink);
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         // Pass the data to the DetailActivity
         intent.putExtra(EXTRA_ID_DRINK, idDrink);
-        intent.putExtra(EXTRA_NAME, nameDrink);
+        intent.putExtra(EXTRA_PATH, pathDrink);
         startActivity(intent);
     }
 }

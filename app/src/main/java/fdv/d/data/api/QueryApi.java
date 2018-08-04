@@ -4,13 +4,10 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-import fdv.d.data.db.Drink;
-
 public interface QueryApi {
-    // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
     @GET("filter.php")
     Call<DrinksList> loadData(@Query("a") String drinkType);
 
     @GET("lookup.php")
-    Call<Drink> loadById(@Query("i") String drinkId);
+    Call<DrinksList> loadById(@Query("i") String drinkId);
 }

@@ -12,11 +12,9 @@ public class Drink {
     private String strDrink;
     private String strDrinkThumb;
 
-    private Object strVideo;
     private String strCategory;
     private String strIBA;
     private String strAlcoholic;
-    private String strGlass;
     private String strInstructions;
     private String dateModified;
 
@@ -60,9 +58,46 @@ public class Drink {
     public String getName() { return strDrink; }
     /* @param strDrink */
     public void setName(String strDrink) { this.strDrink = strDrink; }
-    /* @return Site description */
+/*
+    // @return Site description
     public String getThumb() { return strDrinkThumb; }
-    /* @param desc Site description */
+    // @param desc Site description
     public void setThumb(String strDrinkThumb) { this.strDrinkThumb = strDrinkThumb; }
+*/
+    public String getStrDrinkThumb() {return strDrinkThumb;}
+    public void setStrDrinkThumb(String strDrinkThumb) {this.strDrinkThumb = strDrinkThumb;}
+
+    public String getStrCategory() {return strCategory;}
+    public void setStrCategory(String strCategory) {this.strCategory = strCategory;}
+
+    public String getStrIBA() {return strIBA;}
+    public void setStrIBA(String strIBA) {this.strIBA = strIBA;}
+
+    public String getStrAlcoholic() {return strAlcoholic;}
+    public void setStrAlcoholic(String strAlcoholic) {this.strAlcoholic = strAlcoholic;}
+
+    public String getStrInstructions() {return strInstructions;}
+    public void setStrInstructions(String strInstructions) {this.strInstructions = strInstructions;}
+
+    public String getDateModified() {return dateModified;}
+    public void setDateModified(String dateModified) {this.dateModified = dateModified;}
+
+    public String getStrIngredient1() {return strIngredient1;}
+    public void setStrIngredient1(String strIngredient1) {this.strIngredient1 = strIngredient1;}
+
+    public String getStrIngredient2() {return strIngredient2;}
+    public void setStrIngredient2(String strIngredient2) {this.strIngredient2 = strIngredient2;}
+
+    public String getStrIngredient3() {return strIngredient3;}
+    public void setStrIngredient3(String strIngredient3) {this.strIngredient3 = strIngredient3;}
+
+    public String getStrMeasure1() {return strMeasure1;}
+    public void setStrMeasure1(String strMeasure1) {this.strMeasure1 = strMeasure1;}
+
+    public String getStrMeasure2() {return strMeasure2;}
+    public void setStrMeasure2(String strMeasure2) {this.strMeasure2 = strMeasure2;}
+
+    public String getStrMeasure3() {return strMeasure3;}
+    public void setStrMeasure3(String strMeasure3) {this.strMeasure3 = strMeasure3;}
 }
 
