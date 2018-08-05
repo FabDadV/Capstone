@@ -34,13 +34,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView id;
         TextView name;
         ImageView thumb;
 
         public ListViewHolder(View itemView) {
             super(itemView);
-            id = itemView.findViewById(R.id.tv_id);
             name = itemView.findViewById(R.id.tv_name);
             thumb = itemView.findViewById(R.id.imageView);
             thumb.setMaxWidth(100);
@@ -64,7 +62,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Drink drink = list.get(position);
-        holder.id.setText(drink.getId());
         holder.name.setText(drink.getName());
         Picasso.get()
                 .load(drink.getStrDrinkThumb())

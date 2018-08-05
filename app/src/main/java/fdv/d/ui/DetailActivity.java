@@ -81,8 +81,7 @@ public class DetailActivity extends AppCompatActivity {
                 Log.e("API_ID", "Error: " + t.toString());
             }
         });
-        tvIdDrink.setText(text);
-        Log.d("API text ", " I " + text);
+        tvIdDrink.setText(id_drink);
         Picasso.get()
                 .load(path_drink)
                 .placeholder(R.drawable.no_drink)
