@@ -43,6 +43,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             id = itemView.findViewById(R.id.tv_id);
             name = itemView.findViewById(R.id.tv_name);
             thumb = itemView.findViewById(R.id.imageView);
+            thumb.setMaxWidth(100);
+
             itemView.setOnClickListener(this);
         }
         // This gets called by the child views during a click. @param v - the View that was clicked
