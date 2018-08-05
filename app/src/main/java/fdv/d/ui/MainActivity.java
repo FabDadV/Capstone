@@ -16,8 +16,8 @@ import fdv.d.R;
 import fdv.d.data.db.Drink;
 import fdv.d.vm.ListViewModel;
 
-import static fdv.d.ui.DetailFragment.EXTRA_ID_DRINK;
-import static fdv.d.ui.DetailFragment.EXTRA_PATH;
+import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
+import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
 public class MainActivity extends AppCompatActivity implements ListAdapter.ItemClickListener {
     private ListViewModel viewModel;
