@@ -7,10 +7,12 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import fdv.d.R;
 import fdv.d.data.db.Drink;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        Log.d("TAG", "onCreateView");
+        Log.d("TAG", "onCreate");
         recyclerView = findViewById(R.id.rv_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -58,6 +60,21 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
                 }
             }
         });
+    /*
+     Set the Floating Action Button (FAB) to its corresponding View.
+     Attach an OnClickListener to it, so that when it's clicked, a new intent will be created
+     to launch the AddActivity.
+    */
+        FloatingActionButton fab = findViewById(R.id.fab_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new intent to start an AddTaskActivity
+                Intent addIntent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(addIntent);
+            }
+        });
+
     }
     // Override method in order to handle RecyclerView item clicks.
     @Override
@@ -69,4 +86,6 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
         intent.putExtra(EXTRA_PATH, pathDrink);
         startActivity(intent);
     }
+    // Initialize member variable for the data base
+//    db = TasksDB.getInstance(getApplicationContext());
 }

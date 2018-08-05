@@ -1,8 +1,12 @@
 package fdv.d.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +31,18 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_acrivity);
+
+        FloatingActionButton fab = findViewById(R.id.edit_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent updateIntent = new Intent(DetailActivity.this, UpdateActivity.class);
+                startActivity(updateIntent);
+
+            }
+        });
 
         ImageView drinkView = findViewById(R.id.iv_drink);
         TextView tvIdDrink = findViewById(R.id.tv_id_drink);

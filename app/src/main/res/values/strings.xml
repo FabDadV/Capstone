@@ -4,5 +4,8 @@
     <string name="tv_id">N1</string>
     <string name="tv_name">Very delicious drink</string>
     <string name="tv_thumb">thumb</string>
+    <string name="title_add">Add</string>
+    <string name="title_update">Update</string>
+    <string name="title_detail">Cocktail</string>
 </resources>
 

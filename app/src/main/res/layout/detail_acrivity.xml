@@ -43,4 +43,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tv_cat"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/edit_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_edit_o56" />
+
 </android.support.constraint.ConstraintLayout>
