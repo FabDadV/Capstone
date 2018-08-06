@@ -4,13 +4,15 @@ import java.util.List;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
@@ -22,6 +24,7 @@ import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
 import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
 public class MainActivity extends AppCompatActivity implements ListAdapter.ItemClickListener {
+    private static final int DEFAULT_SIZE = 180;
     private ListViewModel viewModel;
     private List<Drink> list;
     private RecyclerView recyclerView;
@@ -35,7 +38,10 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
 
         Log.d("TAG", "onCreate");
         recyclerView = findViewById(R.id.rv_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        int numberOfColumns = calculateColumns(this);
+                // Set the gridLayoutManager on recyclerView
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfColumns);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
 
         adapter = new ListAdapter(this, list);
@@ -88,4 +94,13 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
     }
     // Initialize member variable for the data base
 //    db = TasksDB.getInstance(getApplicationContext());
+
+     // Calculate number of columns in GridLayoutManager
+    private static int calculateColumns(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        return (int) (dpWidth / DEFAULT_SIZE);
+    }
+
+
 }

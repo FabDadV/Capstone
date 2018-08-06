@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimaryLight">
 <!--
     <android.support.design.widget.AppBarLayout
@@ -26,8 +26,8 @@
 <!-- RecyclerView that is responsible for holding a Cocktails list data -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimaryLight"/>
 
     <android.support.design.widget.FloatingActionButton
