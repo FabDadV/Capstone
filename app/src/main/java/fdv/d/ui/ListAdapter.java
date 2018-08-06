@@ -41,7 +41,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             super(itemView);
             name = itemView.findViewById(R.id.tv_name);
             thumb = itemView.findViewById(R.id.imageView);
-            thumb.setMaxWidth(100);
+//            thumb.setMaxWidth(100);
 
             itemView.setOnClickListener(this);
         }

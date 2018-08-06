@@ -47,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         ImageView drinkView = findViewById(R.id.iv_drink);
-        drinkView.setMaxWidth(100);
+//        drinkView.setMaxWidth(100);
         tvDrink = findViewById(R.id.tv_drink);
         tvCategory = findViewById(R.id.tv_cat);
         tvIngredients = findViewById(R.id.tv_ings);
@@ -55,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
 
         String id_drink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String path_drink = getIntent().getStringExtra(EXTRA_PATH);
-// https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
+//  https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
         App.getApi().loadById(id_drink).enqueue(new Callback<DrinksList>() {
             @Override
             public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
