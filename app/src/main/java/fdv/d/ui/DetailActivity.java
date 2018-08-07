@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,15 +25,24 @@ import fdv.d.data.api.DrinksList;
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID_DRINK = "id_drink";
     public static final String EXTRA_PATH = "path_drink";
+/*
     private TextView tvDrink;
     private TextView tvCategory;
     private TextView tvIngredients;
     private TextView tvInstruction;
+*/
+
+    @BindView(R.id.iv_drink) ImageView drinkView;
+    @BindView(R.id.tv_drink) TextView tvDrink;
+    @BindView(R.id.tv_cat) TextView tvCategory;
+    @BindView(R.id.tv_ings) TextView tvIngredients;
+    @BindView(R.id.tv_text) TextView tvInstruction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_acrivity);
+        ButterKnife.bind(this);
 
         FloatingActionButton fab = findViewById(R.id.edit_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,13 +56,13 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
-
+/*
         ImageView drinkView = findViewById(R.id.iv_drink);
-//        drinkView.setMaxWidth(100);
         tvDrink = findViewById(R.id.tv_drink);
         tvCategory = findViewById(R.id.tv_cat);
         tvIngredients = findViewById(R.id.tv_ings);
         tvInstruction = findViewById(R.id.tv_text);
+*/
 
         String id_drink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String path_drink = getIntent().getStringExtra(EXTRA_PATH);
@@ -65,7 +76,7 @@ public class DetailActivity extends AppCompatActivity {
                     String s = Utils.getIngregientsList(drink);
                     Log.d("API_ID"," Ings: " +s);
                     tvIngredients.setText(s);
-                    tvDrink.setText(drink.getName());
+                    tvDrink.setText(drink.getStrDrink());
                     tvCategory.setText(drink.getStrCategory());
                     tvInstruction.setText(drink.getStrInstructions());
                 } else {

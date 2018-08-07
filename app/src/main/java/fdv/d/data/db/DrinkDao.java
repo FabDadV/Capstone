@@ -20,4 +20,7 @@ public interface DrinkDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Drink> drinksList);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertDrink(Drink drink);
 }

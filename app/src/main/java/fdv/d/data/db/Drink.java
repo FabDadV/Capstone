@@ -51,13 +51,17 @@ public class Drink {
     private String strMeasure15;
 
     /* @return The Id */
-    public String getId() { return idDrink; }
+    public int getId() { return id; }
     /* @param Id */
-    public void setId(String idDrink) { this.idDrink = idDrink; }
+    public void setId(int id) { this.id = id; }
+    /* @return The Id */
+    public String getIdDrink() { return idDrink; }
+    /* @param Id */
+    public void setIdDrink(String idDrink) { this.idDrink = idDrink; }
     /* @return Drink name */
-    public String getName() { return strDrink; }
+    public String getStrDrink() { return strDrink; }
     /* @param strDrink */
-    public void setName(String strDrink) { this.strDrink = strDrink; }
+    public void setStrDrink(String strDrink) { this.strDrink = strDrink; }
 /*
     // @return Site description
     public String getThumb() { return strDrinkThumb; }

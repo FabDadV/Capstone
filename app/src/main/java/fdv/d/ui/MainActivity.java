@@ -16,6 +16,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import fdv.d.R;
 import fdv.d.data.db.Drink;
 import fdv.d.vm.ListViewModel;
@@ -27,17 +30,20 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
     private static final int DEFAULT_SIZE = 180;
     private ListViewModel viewModel;
     private List<Drink> list;
-    private RecyclerView recyclerView;
+//    private RecyclerView recyclerView;
     private ListAdapter.ItemClickListener listener;
     private ListAdapter adapter;
+
+    @BindView(R.id.rv_list) RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        ButterKnife.bind(this);
 
         Log.d("TAG", "onCreate");
-        recyclerView = findViewById(R.id.rv_list);
+//        recyclerView = findViewById(R.id.rv_list);
         int numberOfColumns = calculateColumns(this);
                 // Set the gridLayoutManager on recyclerView
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfColumns);

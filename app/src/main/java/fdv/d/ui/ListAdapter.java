@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fdv.d.R;
 import fdv.d.data.db.Drink;
 
@@ -34,21 +36,26 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+/*
         TextView name;
         ImageView thumb;
+*/
+        @BindView(R.id.tv_name) TextView name;
+        @BindView(R.id.imageView) ImageView thumb;
 
         public ListViewHolder(View itemView) {
             super(itemView);
+/*
             name = itemView.findViewById(R.id.tv_name);
             thumb = itemView.findViewById(R.id.imageView);
-//            thumb.setMaxWidth(100);
-
+*/
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
         // This gets called by the child views during a click. @param v - the View that was clicked
         @Override
         public void onClick(View view) {
-            String itemId = list.get(getAdapterPosition()).getId();
+            String itemId = list.get(getAdapterPosition()).getIdDrink();
             String itemPath = list.get(getAdapterPosition()).getStrDrinkThumb();
             itemClickListener.onItemClickListener(itemId, itemPath);
         }
@@ -62,7 +69,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Drink drink = list.get(position);
-        holder.name.setText(drink.getName());
+        holder.name.setText(drink.getStrDrink());
         Picasso.get()
                 .load(drink.getStrDrinkThumb())
                 .error(R.drawable.err_drink)

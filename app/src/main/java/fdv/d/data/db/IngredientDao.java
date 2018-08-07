@@ -13,10 +13,11 @@ public interface IngredientDao {
     List<Ingredient> getAll();
 
     @Query("SELECT * FROM tab_ings WHERE id = :id")
-    LiveData<Ingredient> loadById(int id);
-
-    @Query("SELECT * FROM tab_ings WHERE id = :id")
     Ingredient getById(int id);
+/*
+    @Query("SELECT * FROM tab_ings WHERE id = :id")
+    LiveData<Ingredient> loadById(int id);
+*/
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Ingredient> ingredientsList);
