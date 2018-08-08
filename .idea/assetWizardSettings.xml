@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="d500f9" />
-                            <entry key="outputName" value="ic_bad" />
-                            <entry key="sourceFile" value="C:\Users\FabDa" />
+                            <entry key="outputName" value="ic_launcher" />
+                            <entry key="sourceFile" value="F:\G100 Developing Android Apps\G106 Capstone Project\Icons\Drinks\WhiskeySourCocktail.svg" />
                           </map>
                         </option>
                       </PersistentState>
