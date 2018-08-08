@@ -7,5 +7,12 @@
     <string name="title_add">Add</string>
     <string name="title_update">Update</string>
     <string name="title_detail">Cocktail</string>
+    <string name="strong_label">Strong</string>
+    <string name="soft_label">Soft</string>
+    <string name="health_label">Health</string>
+    <string name="fav_label">Favorite</string>
+    <string name="ing_label">ingredient</string>
+    <string name="search_label">Search</string>
+
 </resources>
 

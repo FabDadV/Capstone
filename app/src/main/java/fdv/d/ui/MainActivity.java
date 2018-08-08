@@ -14,7 +14,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,8 +101,48 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
         intent.putExtra(EXTRA_PATH, pathDrink);
         startActivity(intent);
     }
+
+    // Creating Drinks search menu: ( Strong Soft Health ) Favorite Ingredient
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.strong_item:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                return true;
+            case R.id.soft_item:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                return true;
+            case R.id.health_item:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                return true;
+            case R.id.fav_search:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                return true;
+/*
+            case R.id.ing_search:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                return false;
+            case R.id.run_search:
+                return true;
+*/
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
     // Initialize member variable for the data base
-//    db = TasksDB.getInstance(getApplicationContext());
+//    db = AppDB.getInstance(getApplicationContext());
 
      // Calculate number of columns in GridLayoutManager
     private static int calculateColumns(Context context) {
@@ -107,6 +150,4 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         return (int) (dpWidth / DEFAULT_SIZE);
     }
-
-
 }
