@@ -17,9 +17,10 @@ import fdv.d.data.api.DrinksList;
 import fdv.d.data.api.QueryApi;
 import fdv.d.data.db.Drink;
 
+import static fdv.d.App.drinkType;
+
 public class ListViewModel extends AndroidViewModel {
 // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
-    public static final String DRINK_TYPE = "Optional_Alcohol";
     private MutableLiveData<List<Drink>> listLiveData;
     private QueryApi queryApi;
 
@@ -32,7 +33,7 @@ public class ListViewModel extends AndroidViewModel {
             listLiveData = new MutableLiveData<>();
 
         // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
-            App.getApi().loadData(DRINK_TYPE).enqueue(new Callback<DrinksList>() {
+            App.getApi().loadData(drinkType).enqueue(new Callback<DrinksList>() {
                 @Override
                 public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                     //Данные успешно пришли, но надо проверить response.body() на null
