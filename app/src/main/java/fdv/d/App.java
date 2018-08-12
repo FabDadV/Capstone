@@ -12,6 +12,8 @@ public final class App extends Application {
     // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic Non_Alcoholic Optional_Alcohol
     private static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/";
     private static QueryApi queryApi;
+    public static String drinkType = "Optional_Alcohol";
+
 
     @Override
     public void onCreate() {

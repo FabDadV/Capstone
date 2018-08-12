@@ -16,12 +16,12 @@
             android:title="@string/strong_label" />
         <item
             android:id="@+id/soft_item"
-            android:checked="true"
             android:orderInCategory="300"
             android:title="@string/soft_label" />
         <item
             android:id="@+id/health_item"
             android:orderInCategory="300"
+            android:checked="true"
             android:title="@string/health_label" />
     </group>
 <!--

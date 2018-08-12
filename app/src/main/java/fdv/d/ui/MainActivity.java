@@ -26,8 +26,9 @@ import fdv.d.R;
 import fdv.d.data.db.Drink;
 import fdv.d.vm.ListViewModel;
 
-import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
+import static fdv.d.App.drinkType;
 import static fdv.d.ui.DetailActivity.EXTRA_PATH;
+import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
 
 public class MainActivity extends AppCompatActivity implements ListAdapter.ItemClickListener {
     private static final int DEFAULT_SIZE = 180;
@@ -114,14 +115,20 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
             case R.id.strong_item:
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
+                if(item.isEnabled()) drinkType = "Alcoholic";
+//                adapter.notifyDataSetChanged();
+//                recyclerView.invalidate();;
+//                ListViewModel.class.newInstance().getListLiveData();
                 return true;
             case R.id.soft_item:
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
+                if(item.isEnabled()) drinkType = "No_Alcoholic";
                 return true;
             case R.id.health_item:
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
+                if(item.isEnabled()) drinkType = "Optional_Alcohol";
                 return true;
             case R.id.fav_search:
                 if (item.isChecked()) item.setChecked(false);
@@ -138,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     // Initialize member variable for the data base
