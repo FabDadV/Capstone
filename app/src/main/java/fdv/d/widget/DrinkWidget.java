@@ -1,10 +1,14 @@
-package fdv.d;
+package fdv.d.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
+import fdv.d.R;
+import fdv.d.ui.MainActivity;
 /**
  * Implementation of App Widget functionality.
  */
@@ -12,16 +16,22 @@ public class DrinkWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
+        Intent intent = new Intent(context, MainActivity.class);
+        /* PendingIntent - wrapper for intent which allows the third-party application (in which it was transmitted)
+          * run the Intent stored inside it, on behalf of the application (and the same with the credentials) that transmitted
+          * this PendingIntent. RemoteViews should be associated with PendingIntent to run MainActivity after clicking.
+         */
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.drink_widget);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
-
+        //CharSequence widgetText = context.getString(R.string.widget_text);
+        //views.setTextViewText(R.id.wtv_name, widgetText);
+        // Widgets allow click handlers to only launch pending intents
+        views.setOnClickPendingIntent(R.id.widget, pendingIntent);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
@@ -29,15 +39,12 @@ public class DrinkWidget extends AppWidgetProvider {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
-
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
     }
-
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
 }
-

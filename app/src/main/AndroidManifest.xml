@@ -7,8 +7,8 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -17,7 +17,6 @@
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,7 +25,6 @@
             android:name=".ui.DetailActivity"
             android:label="@string/title_detail"
             android:parentActivityName=".ui.MainActivity">
-
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -44,9 +42,9 @@
         <activity
             android:name=".ui.UpdateActivity"
             android:label="@string/title_update"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <receiver android:name=".DrinkWidget">
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <receiver android:name=".widget.DrinkWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -56,5 +54,4 @@
                 android:resource="@xml/drink_widget_info" />
         </receiver>
     </application>
-
 </manifest>

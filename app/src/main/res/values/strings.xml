@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">HomeCoctails</string>
-    <string name="search_action">Search</string>
     <string name="tv_id">N1</string>
     <string name="tv_name">Very delicious drink</string>
     <string name="tv_thumb">thumb</string>
@@ -13,7 +12,8 @@
     <string name="fav_label">Favorite</string>
     <string name="ing_label">ingredient</string>
     <string name="search_label">Search</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="search_action">Search</string>
+    <string name="widget_text">Cocktail</string>
     <string name="add_widget">Add widget</string>
 
 </resources>
