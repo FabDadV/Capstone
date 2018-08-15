@@ -9,8 +9,9 @@
     <string name="strong_label">Strong</string>
     <string name="soft_label">Soft</string>
     <string name="health_label">Health</string>
-    <string name="fav_label">Favorite</string>
     <string name="ing_label">ingredient</string>
+    <string name="fav_label">Favorite</string>
+    <string name="no_fav">Not favorite</string>
     <string name="search_label">Search</string>
     <string name="search_action">Search</string>
     <string name="widget_text">Cocktail</string>

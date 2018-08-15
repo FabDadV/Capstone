@@ -6,10 +6,17 @@
     tools:context="fdv.d.ui.DetailActivity">
 
     <item
-        android:id="@+id/fav_search"
+        android:id="@+id/no_fav"
         android:orderInCategory="100"
-        android:icon="@drawable/no_heart"
-        android:title="@string/fav_label"
+        android:icon="@drawable/no_fav"
+        android:title="@string/no_fav"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/add_widget"
+        android:orderInCategory="200"
+        android:icon="@drawable/add_widget"
+        android:title="@string/add_widget"
         app:showAsAction="always" />
 
 </menu>

@@ -17,16 +17,18 @@ public class DrinkWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         Intent intent = new Intent(context, MainActivity.class);
-        /* PendingIntent - wrapper for intent which allows the third-party application (in which it was transmitted)
-          * run the Intent stored inside it, on behalf of the application (and the same with the credentials) that transmitted
-          * this PendingIntent. RemoteViews should be associated with PendingIntent to run MainActivity after clicking.
+        /* PendingIntent - a wrap around an intent which allows other applications
+         * (in which it was transmitted) to have access and run that intent in your application
+         * stored inside it, on behalf of the application (and the same with the credentials)
+         * that transmitted this PendingIntent. RemoteViews should be associated
+         * with PendingIntent to run MainActivity when this view is clicked on.
          */
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.drink_widget);
-        //CharSequence widgetText = context.getString(R.string.widget_text);
-        //views.setTextViewText(R.id.wtv_name, widgetText);
+        CharSequence widgetText = context.getString(R.string.widget_text);
+        views.setTextViewText(R.id.widget_text, widgetText);
         // Widgets allow click handlers to only launch pending intents
         views.setOnClickPendingIntent(R.id.widget, pendingIntent);
         // Instruct the widget manager to update the widget

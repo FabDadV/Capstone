@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fdv.d.widget.DrinkWidget;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,10 +24,14 @@ import fdv.d.App;
 import fdv.d.utils.Utils;
 import fdv.d.data.db.Drink;
 import fdv.d.data.api.DrinksList;
+import fdv.d.widget.DrinkWidget;
+
+import static fdv.d.App.drinkType;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID_DRINK = "id_drink";
     public static final String EXTRA_PATH = "path_drink";
+    public static final String EXTRA_INGREDIENTS = "extra_ings";
 /*
     private TextView tvDrink;
     private TextView tvCategory;
@@ -99,12 +104,22 @@ public class DetailActivity extends AppCompatActivity {
     // Creating menu: Favorite
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fav_menu, menu);
+        getMenuInflater().inflate(R.menu.detail_menu, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
+        switch (item.getItemId()) {
+            case R.id.no_fav:
 
+                return true;
+            case R.id.add_widget:
+//                DrinkWidget.updateAppWidget(this, appWidgetManager, appWidgetId);
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

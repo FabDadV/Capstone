@@ -39,5 +39,4 @@ public class Utils {
         s = s + drink.getStrIngredient15() + "   " + drink.getStrMeasure15() + "\n";
     return s;
     }
-
 }
