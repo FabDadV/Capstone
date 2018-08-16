@@ -5,6 +5,8 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import fdv.d.R;
@@ -15,7 +17,7 @@ import fdv.d.ui.MainActivity;
 public class DrinkWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+                                String name, String text, int appWidgetId) {
         Intent intent = new Intent(context, MainActivity.class);
         /* PendingIntent - a wrap around an intent which allows other applications
          * (in which it was transmitted) to have access and run that intent in your application
@@ -27,18 +29,32 @@ public class DrinkWidget extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.drink_widget);
-        CharSequence widgetText = context.getString(R.string.widget_text);
-        views.setTextViewText(R.id.widget_text, widgetText);
+        // Update widget text
+        views.setTextViewText(R.id.wtv_name, name);
+        views.setTextViewText(R.id.widget_text, text);
         // Widgets allow click handlers to only launch pending intents
         views.setOnClickPendingIntent(R.id.widget, pendingIntent);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
+
+    public static void updateWidgets(Context context, AppWidgetManager appWidgetManager,
+                                          String name, String text, int[] appWidgetIds) {
+        for (int appWidgetId : appWidgetIds) {
+            updateAppWidget(context, appWidgetManager, name, text, appWidgetId);
+            Log.d("TAG", "updateW " + String.valueOf(appWidgetId));
+        }
+    }
+
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
+        Resources resources = context.getResources();
+        String name = resources.getString(R.string.tv_name);
+        String text = resources.getString(R.string.ing_label);
         for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+            updateAppWidget(context, appWidgetManager, name, text, appWidgetId);
         }
     }
     @Override

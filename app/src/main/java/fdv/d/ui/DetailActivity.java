@@ -1,5 +1,7 @@
 package fdv.d.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -114,8 +116,13 @@ public class DetailActivity extends AppCompatActivity {
 
                 return true;
             case R.id.add_widget:
-//                DrinkWidget.updateAppWidget(this, appWidgetManager, appWidgetId);
-
+                String name = tvDrink.getText().toString();
+                String text = tvIngredients.getText().toString();
+                Log.d("TAG_Wdgt", "updateWidgets");
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, DrinkWidget.class));
+                //Now update all widgets
+                DrinkWidget.updateWidgets(this, appWidgetManager, name, text, appWidgetIds);
                 return true;
 
             default:
