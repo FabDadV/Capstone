@@ -1,5 +1,6 @@
 <resources>
-    <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size">14sp</dimen>
+    <dimen name="text_widget_size">10sp</dimen>
 
     <dimen name="margin">8dp</dimen>
     <dimen name="big_margin">16dp</dimen>

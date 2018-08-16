@@ -4,35 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryLight"
-    android:padding="@dimen/widget_margin">
+    android:background="@color/colorPrimaryLight">
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:layout_gravity="top|center_horizontal"
         android:contentDescription="@string/widget_text"
-        android:src="@drawable/err_drink" />
+        android:src="@drawable/drinks" />
 
     <TextView
         android:id="@+id/wtv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_weight="1"
         android:contentDescription="@string/tv_name"
         android:text="@string/tv_name"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold" />
+        android:textSize="@dimen/text_size" />
     <TextView
         android:id="@+id/widget_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
+        android:layout_weight="100"
         android:contentDescription="@string/widget_text"
         android:text="@string/widget_text"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold|italic" />
+        android:textSize="@dimen/text_widget_size"
+        android:textStyle="italic" />
 
 </LinearLayout>
