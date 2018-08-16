@@ -103,7 +103,7 @@ public class DetailActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
     }
-    // Creating menu: Favorite
+    // Creating menu: Favorite & Add Widget
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);
