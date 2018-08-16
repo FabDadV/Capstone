@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fdv.d.data.db.AppDB;
 import fdv.d.widget.DrinkWidget;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +35,8 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID_DRINK = "id_drink";
     public static final String EXTRA_PATH = "path_drink";
     public static final String EXTRA_INGREDIENTS = "extra_ings";
+
+    private Drink drink;
 /*
     private TextView tvDrink;
     private TextView tvCategory;
@@ -80,21 +83,21 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                 if (response.isSuccessful()) {
-                    Log.d("API_ID"," is Ok");
-                    Drink drink = response.body().getList().get(0);
+                    Log.d("TAG"," API is Ok");
+                    drink = response.body().getList().get(0);
                     String s = Utils.getIngregientsList(drink);
-                    Log.d("API_ID"," Ings: " +s);
+                    Log.d("TAG"," Ings: " + s);
                     tvIngredients.setText(s);
                     tvDrink.setText(drink.getStrDrink());
                     tvCategory.setText(drink.getStrCategory());
                     tvInstruction.setText(drink.getStrInstructions());
                 } else {
-                    Log.e("API", "response code " + response.code());
+                    Log.e("TAG", "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(Call<DrinksList> call, Throwable t) {
-                Log.e("API_ID", "Error: " + t.toString());
+                Log.e("TAG", "API Error: " + t.toString());
             }
         });
         Picasso.get()
@@ -102,6 +105,20 @@ public class DetailActivity extends AppCompatActivity {
                 .placeholder(R.drawable.no_drink)
                 .error(R.drawable.err_drink)
                 .into(drinkView);
+    }
+    // Check in drink with id is favorite
+    private boolean checkIsFav(String id) {
+        Drink drink = AppDB.getInstance(this).drinkDao().getByIdDrink(id);
+        Log.d("TAG", "checkIsFav" + String.valueOf(drink.getIdDrink()));
+        /* return true if the cursor is not empty */
+        boolean isFav = (drink!=null);
+        Log.d("TAG", "checkIsFav" + String.valueOf(isFav));
+        return isFav;
+    }
+    // saves Favorite cocktail information to the local database
+    private void saveFav() {
+        Log.d("TAG", "saveFav" + String.valueOf(drink.getIdDrink()));
+        AppDB.getInstance(this).drinkDao().insertDrink(drink);
     }
     // Creating menu: Favorite & Add Widget
     @Override
@@ -112,8 +129,9 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.no_fav:
-
+            case R.id.fav:
+//                if(!checkIsFav(drink.getIdDrink()))
+                    saveFav();
                 return true;
             case R.id.add_widget:
                 String name = tvDrink.getText().toString();

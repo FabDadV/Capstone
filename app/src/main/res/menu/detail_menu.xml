@@ -6,10 +6,10 @@
     tools:context="fdv.d.ui.DetailActivity">
 
     <item
-        android:id="@+id/no_fav"
+        android:id="@+id/fav"
         android:orderInCategory="100"
-        android:icon="@drawable/no_fav"
-        android:title="@string/no_fav"
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/add_fav"
         app:showAsAction="always" />
 
     <item

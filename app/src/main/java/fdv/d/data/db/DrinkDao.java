@@ -18,6 +18,9 @@ public interface DrinkDao {
     @Query("SELECT * FROM tab_drinks WHERE id = :id")
     Drink getById(int id);
 
+    @Query("SELECT * FROM tab_drinks WHERE idDrink = :idDrink")
+    Drink getByIdDrink(String idDrink);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Drink> drinksList);
 

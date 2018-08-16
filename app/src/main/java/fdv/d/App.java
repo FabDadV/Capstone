@@ -7,10 +7,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import fdv.d.data.api.QueryApi;
-
+// Android Application class. Used for accessing singletons.
 public final class App extends Application {
     // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic Non_Alcoholic Optional_Alcohol
     private static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/";
+    private AppExecutors appExecutors;
     private static QueryApi queryApi;
     public static String drinkType = "Optional_Alcohol";
 
