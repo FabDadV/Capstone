@@ -17,6 +17,7 @@ import fdv.d.data.api.DrinksList;
 import fdv.d.data.api.QueryApi;
 import fdv.d.data.db.Drink;
 
+import static fdv.d.App.doReset;
 import static fdv.d.App.drinkType;
 
 public class ListViewModel extends AndroidViewModel {
@@ -29,7 +30,8 @@ public class ListViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Drink>> getListLiveData() {
-        if (listLiveData == null) {
+        if (listLiveData == null || doReset)
+        {
             listLiveData = new MutableLiveData<>();
 
         // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
@@ -47,10 +49,11 @@ public class ListViewModel extends AndroidViewModel {
                 @Override
                 public void onFailure(Call<DrinksList> call, Throwable t) {
                     //Проверка на ошибку
-                    Log.e("TAG", "Error: " + t.toString());
+                    Log.e("TAG", "API Error: " + t.toString());
 //                    Toast.makeText(getContext(),"An error occurred during networking", Toast.LENGTH_SHORT).show();
                 }
             });
+            doReset = false;
         }
         return listLiveData;
     }

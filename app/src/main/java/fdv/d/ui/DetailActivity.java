@@ -29,6 +29,8 @@ import fdv.d.data.db.Drink;
 import fdv.d.data.api.DrinksList;
 import fdv.d.widget.DrinkWidget;
 
+import static fdv.d.App.appDB;
+import static fdv.d.App.appExecutors;
 import static fdv.d.App.drinkType;
 
 public class DetailActivity extends AppCompatActivity {
@@ -43,7 +45,6 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tvIngredients;
     private TextView tvInstruction;
 */
-
     @BindView(R.id.iv_drink) ImageView drinkView;
     @BindView(R.id.tv_drink) TextView tvDrink;
     @BindView(R.id.tv_cat) TextView tvCategory;
@@ -83,10 +84,10 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                 if (response.isSuccessful()) {
-                    Log.d("TAG"," API is Ok");
+                    Log.d("TAG","API is Ok");
                     drink = response.body().getList().get(0);
                     String s = Utils.getIngregientsList(drink);
-                    Log.d("TAG"," Ings: " + s);
+//                    Log.d("TAG","Ings: " + s);
                     tvIngredients.setText(s);
                     tvDrink.setText(drink.getStrDrink());
                     tvCategory.setText(drink.getStrCategory());
@@ -108,17 +109,22 @@ public class DetailActivity extends AppCompatActivity {
     }
     // Check in drink with id is favorite
     private boolean checkIsFav(String id) {
-        Drink drink = AppDB.getInstance(this).drinkDao().getByIdDrink(id);
+        Drink drink = appDB.drinkDao().getByIdDrink(id);
         Log.d("TAG", "checkIsFav" + String.valueOf(drink.getIdDrink()));
         /* return true if the cursor is not empty */
         boolean isFav = (drink!=null);
         Log.d("TAG", "checkIsFav" + String.valueOf(isFav));
         return isFav;
     }
-    // saves Favorite cocktail information to the local database
+    // Save Favorite cocktail information to the local database
     private void saveFav() {
-        Log.d("TAG", "saveFav" + String.valueOf(drink.getIdDrink()));
-        AppDB.getInstance(this).drinkDao().insertDrink(drink);
+        Log.d("TAG", "saveFav: " + String.valueOf(drink.getIdDrink()));
+        appExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                appDB.drinkDao().insertDrink(drink);
+            }
+        });
     }
     // Creating menu: Favorite & Add Widget
     @Override
