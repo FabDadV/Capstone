@@ -10,11 +10,14 @@
     <string name="soft_label">Soft</string>
     <string name="health_label">Healthy</string>
     <string name="ing_label">Ingredients</string>
+    <string name="mes_label">Measure</string>
     <string name="fav_label">Favorite</string>
     <string name="add_fav">Add favorite</string>
     <string name="no_fav">Not favorite</string>
     <string name="search_label">Search</string>
     <string name="search_action">Search</string>
+    <string name="text">Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+         bla bla bla bla bla bla bla bla bla bla</string>
     <string name="widget_text">Cocktail</string>
     <string name="add_widget">Add widget</string>
 
