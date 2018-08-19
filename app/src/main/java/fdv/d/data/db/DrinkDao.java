@@ -13,6 +13,9 @@ public interface DrinkDao {
     @Query("SELECT * FROM tab_drinks")
     LiveData<List<Drink>> loadAll();
 
+    @Query("SELECT * FROM tab_drinks")
+    List<Drink> getAll();
+
     @Query("SELECT * FROM tab_drinks WHERE id = :id")
     Drink getById(int id);
 
