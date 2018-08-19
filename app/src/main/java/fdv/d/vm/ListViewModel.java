@@ -35,12 +35,10 @@ public class ListViewModel extends AndroidViewModel {
         {
             listLiveData = new MutableLiveData<>();
 
-/*
             if(drinkType.equals("Favorite")) {
                 doReset = false;
                 return appDB.drinkDao().loadAll();
             }
-*/
         // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
             App.getApi().loadData(drinkType).enqueue(new Callback<DrinksList>() {
                 @Override
