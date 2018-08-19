@@ -170,8 +170,9 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
                 obtainViewModel();
                 return true;
             case R.id.fav_search:
-                if (item.isChecked()) item.setChecked(false);
-                else item.setChecked(true);
+                drinkType = "Favorite";
+                doReset = true;
+                obtainViewModel();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -24,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static fdv.d.App.appDB;
+import static fdv.d.App.appExecutors;
 import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
 import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
@@ -81,6 +83,8 @@ public class UpdateActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Drink upDrink = new Drink();
+
                 Snackbar.make(view, "Save Coctail's version", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -120,6 +124,31 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
     }
+    // Check in drink with id is favorite
+    private boolean checkIsFav(String id) {
+
+        Drink drink = appDB.drinkDao().getByIdDrink(id);
+        Log.d("TAG", "checkIsFav" + String.valueOf(drink.getIdDrink()));
+        /* return true if the cursor is not empty */
+        boolean isFav = (drink!=null);
+        Log.d("TAG", "checkIsFav" + String.valueOf(isFav));
+        return isFav;
+    }
+
+    // Save Favorite cocktail information to the local database
+    private void updateFav() {
+        Log.d("TAG", "updateFav: " + String.valueOf(drink.getIdDrink()));
+
+
+        appExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                appDB.drinkDao().insertDrink(drink);
+            }
+        });
+    }
+
+
 
     private void inflateIngredients(Drink drink) {
         Log.d("TAG"," inflate Ings" + drink.getStrIngredient1());
