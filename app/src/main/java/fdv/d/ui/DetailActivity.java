@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fdv.d.data.db.AppDB;
-import fdv.d.widget.DrinkWidget;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,20 +29,13 @@ import fdv.d.widget.DrinkWidget;
 
 import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;
-import static fdv.d.App.drinkType;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID_DRINK = "id_drink";
     public static final String EXTRA_PATH = "path_drink";
-    public static final String EXTRA_INGREDIENTS = "extra_ings";
 
     private Drink drink;
-/*
-    private TextView tvDrink;
-    private TextView tvCategory;
-    private TextView tvIngredients;
-    private TextView tvInstruction;
-*/
+
     @BindView(R.id.iv_drink) ImageView drinkView;
     @BindView(R.id.tv_drink) TextView tvDrink;
     @BindView(R.id.tv_cat) TextView tvCategory;
@@ -61,12 +52,11 @@ public class DetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-/*              Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-*/
                 Intent updateIntent = new Intent(DetailActivity.this, UpdateActivity.class);
+                // Pass the data to the UpdateActivity
+                updateIntent.putExtra(EXTRA_ID_DRINK, drink.getIdDrink());
+                updateIntent.putExtra(EXTRA_PATH, drink.getStrDrinkThumb());
                 startActivity(updateIntent);
-
             }
         });
 /*
@@ -77,17 +67,26 @@ public class DetailActivity extends AppCompatActivity {
         tvInstruction = findViewById(R.id.tv_text);
 */
 
-        String id_drink = getIntent().getStringExtra(EXTRA_ID_DRINK);
-        String path_drink = getIntent().getStringExtra(EXTRA_PATH);
-//  https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
-        App.getApi().loadById(id_drink).enqueue(new Callback<DrinksList>() {
+        String idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
+        String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
+        obtainDrink(idDrink);
+        Picasso.get()
+                .load(pathDrink)
+                .placeholder(R.drawable.no_drink)
+                .error(R.drawable.err_drink)
+                .into(drinkView);
+    }
+    // Obtain Cocktail's detail information from internet by id:
+    // https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
+    public void obtainDrink(String idDrink) {
+        App.getApi().loadById(idDrink).enqueue(new Callback<DrinksList>() {
             @Override
             public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                 if (response.isSuccessful()) {
                     Log.d("TAG","API is Ok");
                     drink = response.body().getList().get(0);
                     String s = Utils.getIngregientsList(drink);
-//                    Log.d("TAG","Ings: " + s);
+                    Log.d("TAG","Ings: " + s);
                     tvIngredients.setText(s);
                     tvDrink.setText(drink.getStrDrink());
                     tvCategory.setText(drink.getStrCategory());
@@ -101,11 +100,6 @@ public class DetailActivity extends AppCompatActivity {
                 Log.e("TAG", "API Error: " + t.toString());
             }
         });
-        Picasso.get()
-                .load(path_drink)
-                .placeholder(R.drawable.no_drink)
-                .error(R.drawable.err_drink)
-                .into(drinkView);
     }
     // Check in drink with id is favorite
     private boolean checkIsFav(String id) {
