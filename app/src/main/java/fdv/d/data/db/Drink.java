@@ -1,17 +1,22 @@
 package fdv.d.data.db;
 
+
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "tab_drinks")
 public class Drink {
+/*
     @PrimaryKey(autoGenerate = true)
     private int id;
+*/
+    @PrimaryKey
+    @NonNull
+    private String idDrink;
     private int idCock;
     private int version;
 
-    private String idDrink;
     private String strDrink;
     private String strDrinkThumb;
 
@@ -53,10 +58,12 @@ public class Drink {
     private String strMeasure14;
     private String strMeasure15;
 
-    /* @return The Id */
+    // @return The Id
+/*
     public int getId() { return id; }
-    /* @param Id */
+    // @param Id
     public void setId(int id) { this.id = id; }
+*/
     // id for own cocktail
     public int getIdCock() { return idCock; }
     public void setIdCock(int idCock) { this.idCock = idCock; }

@@ -2,7 +2,6 @@ package fdv.d.data.db;
 
 import java.util.List;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -14,11 +13,13 @@ public interface DrinkDao {
     @Query("SELECT * FROM tab_drinks")
     LiveData<List<Drink>> loadAll();
 
-    @Query("SELECT * FROM tab_drinks ORDER BY idDrink")
+    @Query("SELECT * FROM tab_drinks ORDER BY idDrink, version")
     List<Drink> getAll();
 
+/*
     @Query("SELECT * FROM tab_drinks WHERE id = :id")
     Drink getById(int id);
+*/
 
     @Query("SELECT * FROM tab_drinks WHERE idDrink = :idDrink")
     Drink getByIdDrink(String idDrink);
