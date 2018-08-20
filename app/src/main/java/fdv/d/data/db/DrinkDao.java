@@ -10,16 +10,15 @@ import android.arch.persistence.room.Query;
 
 @Dao
 public interface DrinkDao {
-    @Query("SELECT * FROM tab_drinks")
-    LiveData<List<Drink>> loadAll();
-
-    @Query("SELECT * FROM tab_drinks ORDER BY idDrink, version")
-    List<Drink> getAll();
-
 /*
     @Query("SELECT * FROM tab_drinks WHERE id = :id")
     Drink getById(int id);
 */
+    @Query("SELECT * FROM tab_drinks ORDER BY idDrink")
+    List<Drink> getAll();
+
+    @Query("SELECT * FROM tab_drinks")
+    LiveData<List<Drink>> loadAll();
 
     @Query("SELECT * FROM tab_drinks WHERE idDrink = :idDrink")
     Drink getByIdDrink(String idDrink);

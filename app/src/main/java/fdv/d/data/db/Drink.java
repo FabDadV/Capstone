@@ -1,6 +1,5 @@
 package fdv.d.data.db;
 
-
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
@@ -10,13 +9,12 @@ public class Drink {
 /*
     @PrimaryKey(autoGenerate = true)
     private int id;
+    private int idCock;
+    private int version;
 */
     @PrimaryKey
     @NonNull
     private String idDrink;
-    private int idCock;
-    private int version;
-
     private String strDrink;
     private String strDrinkThumb;
 
@@ -63,13 +61,13 @@ public class Drink {
     public int getId() { return id; }
     // @param Id
     public void setId(int id) { this.id = id; }
-*/
     // id for own cocktail
     public int getIdCock() { return idCock; }
     public void setIdCock(int idCock) { this.idCock = idCock; }
     // Cocktail's version
     public int getVersion() { return version; }
     public void setVersion(int version) { this.version = version; }
+*/
     /* @return The IdDrink */
     public String getIdDrink() { return idDrink; }
     /* @param IdDrink */
