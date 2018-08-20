@@ -9,8 +9,6 @@ public class Drink {
 /*
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private int idCock;
-    private int version;
 */
     @PrimaryKey
     @NonNull
