@@ -29,6 +29,7 @@ import fdv.d.widget.DrinkWidget;
 
 import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;
+import static fdv.d.App.drinkType;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID_DRINK = "id_drink";
@@ -86,7 +87,7 @@ public class DetailActivity extends AppCompatActivity {
                     Log.d("TAG","API is Ok");
                     drink = response.body().getList().get(0);
                     String s = Utils.getIngregientsList(drink);
-                    Log.d("TAG","Ings: " + s);
+//                    Log.d("TAG","Ings: " + s);
                     tvIngredients.setText(s);
                     tvDrink.setText(drink.getStrDrink());
                     tvCategory.setText(drink.getStrCategory());
@@ -120,6 +121,16 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
+    // Delete Favorite cocktail information from the local database
+    private void deleteFav() {
+        Log.d("TAG", "deleteFav: " + String.valueOf(drink.getIdDrink()));
+        appExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                appDB.drinkDao().deleteDrink(drink);
+            }
+        });
+    }
     // Creating menu: Favorite & Add Widget
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,6 +143,13 @@ public class DetailActivity extends AppCompatActivity {
             case R.id.fav:
 //                if(!checkIsFav(drink.getIdDrink()))
                     saveFav();
+                return true;
+            case R.id.not_fav:
+//                if(!checkIsFav(drink.getIdDrink()))
+                Log.d("TAG", "deleteFav" + drinkType.toString() + drink.getIdDrink().toString());
+                if(drinkType.equals("Favorite")) {
+                    deleteFav();
+                }
                 return true;
             case R.id.add_widget:
                 String name = tvDrink.getText().toString();
