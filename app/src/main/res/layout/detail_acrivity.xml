@@ -73,6 +73,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_constraintBottom_toTopOf="@+id/tv_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_edit_o56"/>
+        app:srcCompat="@drawable/ic_edit"/>
 
 </android.support.constraint.ConstraintLayout>

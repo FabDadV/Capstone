@@ -36,7 +36,6 @@ public class UpdateActivity extends AppCompatActivity {
 
     private List<Drink> list;
     private Drink drink, upDrink;
-    String idDrink;
     private int ver;
 
     @BindView(R.id.iv_update) ImageView drinkView;
@@ -81,7 +80,7 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.update_activity);
         ButterKnife.bind(this);
 
-        idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
+        String idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
         updateIngredients(idDrink);
 
@@ -91,7 +90,9 @@ public class UpdateActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
 
-        CheckInVersion();
+
+        ver = Integer.valueOf(idDrink) + 120000;
+//        CheckInVersion(idDrink);
 
         FloatingActionButton fab = findViewById(R.id.update_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -162,27 +163,30 @@ public class UpdateActivity extends AppCompatActivity {
     }
 */
     // Check in drink's version
-    private void CheckInVersion() {
-        int id = Integer.valueOf(idDrink);
-        final int j = id<100000? 1 : 2;
+    private void CheckInVersion(String id) {
+        int i = Integer.valueOf(id);
+        int j = i<100000? 1 : 2;
+        Log.d("TAG", "ID: " + String.valueOf(i));
+        final String s = id.substring(j);
         appExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                String s = idDrink.substring(j);
                 list.addAll(appDB.drinkDao().checkByIdDrink(s));
             }
         });
+        Log.d("TAG", "list?");
         int k = list.size();
         if (k>0) {
-            int l = Integer.valueOf(list.get(k).getIdDrink());
+            int l = Integer.valueOf(list.get(k-1).getIdDrink());
             if(l>120000) {
                 int m = l/10000;
-                int i = l - m*10000;
-                ver = (m+1)*10000 +i;
+                int n = l - m*10000;
+                ver = (m+1)*10000 + n;
             }
         } else {
-            ver = id + 110000;
+            ver = i + 110000;
         }
+        Log.d("TAG", "Ver: " + String.valueOf(ver));
     }
     // Inflate ingredients information
     private void inflateIngredients(Drink drink) {

@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
             }
         });
     }
-
+    // Obtain Cocktail's information from internet
     private void obtainViewModel() {
         // Get a new or existing ViewModel from the ViewModelProvider.
         final ListViewModel viewModel = ViewModelProviders.of(this).get(ListViewModel.class);
@@ -158,7 +157,6 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
                 return super.onOptionsItemSelected(item);
         }
     }
-
      // Calculate number of columns in GridLayoutManager
     private static int calculateColumns(Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();

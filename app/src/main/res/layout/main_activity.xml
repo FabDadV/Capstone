@@ -37,6 +37,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_plus_56" />
+        app:srcCompat="@drawable/ic_plus" />
     <!-- android:clickable="true" -->
 </android.support.constraint.ConstraintLayout>
