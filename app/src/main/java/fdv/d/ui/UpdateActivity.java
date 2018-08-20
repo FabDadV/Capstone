@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,7 +34,10 @@ import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    private Drink drink;
+    private List<Drink> list;
+    private Drink drink, upDrink;
+    String idDrink;
+    private int ver;
 
     @BindView(R.id.iv_update) ImageView drinkView;
     @BindView(R.id.tv_drink) TextView tvDrink;
@@ -73,24 +79,9 @@ public class UpdateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_activity);
-/*
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-*/
         ButterKnife.bind(this);
 
-        FloatingActionButton fab = findViewById(R.id.update_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Drink upDrink = new Drink();
-
-                Snackbar.make(view, "Save Coctail's version", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        String idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
+        idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
         updateIngredients(idDrink);
 
@@ -100,11 +91,35 @@ public class UpdateActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
 
+        CheckInVersion();
+
+        FloatingActionButton fab = findViewById(R.id.update_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                upDrink = new Drink().getDrink(drink);
+                Log.d("TAG", "getDrink: " + upDrink.getIdDrink());
+                if(diffDrinks()) {
+                    upDrink.setIdDrink(String.valueOf(ver));
+                    appExecutors.diskIO().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            appDB.drinkDao().insertDrink(upDrink);
+                        }
+                    });
+                }
+//                finish();
+/*
+                Snackbar.make(view, "Save Coctail's version", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+*/
+            }
+        });
     }
     // Obtain Cocktail's detail information from internet by id:
     // https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
-    public void updateIngredients(String idDrink) {
-        App.getApi().loadById(idDrink).enqueue(new Callback<DrinksList>() {
+    public void updateIngredients(String id) {
+        App.getApi().loadById(id).enqueue(new Callback<DrinksList>() {
             @Override
             public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
                 if (response.isSuccessful()) {
@@ -134,12 +149,10 @@ public class UpdateActivity extends AppCompatActivity {
         Log.d("TAG", "checkIsFav" + String.valueOf(isFav));
         return isFav;
     }
-
     // Save Favorite cocktail information to the local database
+/*
     private void updateFav() {
         Log.d("TAG", "updateFav: " + String.valueOf(drink.getIdDrink()));
-
-
         appExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
@@ -147,9 +160,31 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
+*/
+    // Check in drink's version
+    private void CheckInVersion() {
+        int id = Integer.valueOf(idDrink);
+        final int j = id<100000? 1 : 2;
+        appExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                String s = idDrink.substring(j);
+                list.addAll(appDB.drinkDao().checkByIdDrink(s));
+            }
+        });
+        int k = list.size();
+        if (k>0) {
+            int l = Integer.valueOf(list.get(k).getIdDrink());
+            if(l>120000) {
+                int m = l/10000;
+                int i = l - m*10000;
+                ver = (m+1)*10000 +i;
+            }
+        } else {
+            ver = id + 110000;
+        }
+    }
+    // Inflate ingredients information
     private void inflateIngredients(Drink drink) {
         Log.d("TAG"," inflate Ings" + drink.getStrIngredient1());
         Resources resources = this.getResources();
@@ -278,4 +313,86 @@ public class UpdateActivity extends AppCompatActivity {
         return (t.equals("") || t.equals(" ") || t.equals("\n")) &&
                 (m.equals("") || m.equals(" ") || m.equals("\n"));
     }
+    // Check in update drink
+    private boolean diffDrinks() {
+        boolean diff = false;
+        String measure;
+        measure = editMeasure1.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure1())) {
+            upDrink.setStrMeasure1(measure);
+            diff = true;
+        }
+        measure = editMeasure2.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure2())) {
+            upDrink.setStrMeasure2(measure);
+            diff = true;
+        }
+        measure = editMeasure3.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure3())) {
+            upDrink.setStrMeasure3(measure);
+            diff = true;
+        }
+        measure = editMeasure4.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure4())) {
+            upDrink.setStrMeasure4(measure);
+            diff = true;
+        }
+        measure = editMeasure5.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure5())) {
+            upDrink.setStrMeasure5(measure);
+            diff = true;
+        }
+        measure = editMeasure6.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure6())) {
+            upDrink.setStrMeasure6(measure);
+            diff = true;
+        }
+        measure = editMeasure7.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure7())) {
+            upDrink.setStrMeasure7(measure);
+            diff = true;
+        }
+        measure = editMeasure8.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure8())) {
+            upDrink.setStrMeasure8(measure);
+            diff = true;
+        }
+        measure = editMeasure9.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure9())) {
+            upDrink.setStrMeasure9(measure);
+            diff = true;
+        }
+        measure = editMeasure10.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure10())) {
+            upDrink.setStrMeasure10(measure);
+            diff = true;
+        }
+        measure = editMeasure11.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure11())) {
+            upDrink.setStrMeasure11(measure);
+            diff = true;
+        }
+        measure = editMeasure12.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure12())) {
+            upDrink.setStrMeasure12(measure);
+            diff = true;
+        }
+        measure = editMeasure13.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure13())) {
+            upDrink.setStrMeasure13(measure);
+            diff = true;
+        }
+        measure = editMeasure14.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure14())) {
+            upDrink.setStrMeasure14(measure);
+            diff = true;
+        }
+        measure = editMeasure15.getText().toString();
+        if (!measure.equals(upDrink.getStrMeasure15())) {
+            upDrink.setStrMeasure15(measure);
+            diff = true;
+        }
+        return diff;
+    }
+
 }

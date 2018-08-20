@@ -60,26 +60,9 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), VERTICAL));
 
-/*
-        // Get a new or existing ViewModel from the ViewModelProvider.
-        final ListViewModel viewModel = ViewModelProviders.of(this).get(ListViewModel.class);
-        // Add an observer on the LiveData returned by getListLiveData.
-        // The onChanged() method fires when the observed data changes
-        Log.d("TAG", "observe");
-        viewModel.getListLiveData().observe(this, new Observer<List<Drink>>() {
-            @Override
-            public void onChanged(@Nullable final List<Drink> drinks) {
-                // Update the cached copy of the drinks in the adapter.
-                if (list == null) {
-                    list = drinks;
-                    Log.d("TAG", "adapter set Drinks");
-                    adapter.setDrinks(list);
-                } else {
-                    list = drinks;
-                }
-            }
-        });
-*/
+        obtainViewModel();
+        Log.d("TAG", " obtained VM ");
+
     /*
      Set the Floating Action Button (FAB) to its corresponding View.
      Attach an OnClickListener to it, so that when it's clicked, a new intent will be created
@@ -94,9 +77,6 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
                 startActivity(addIntent);
             }
         });
-
-        obtainViewModel();
-        Log.d("TAG", " obtained VM ");
     }
 
     private void obtainViewModel() {

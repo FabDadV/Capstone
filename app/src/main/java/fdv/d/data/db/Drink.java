@@ -76,12 +76,6 @@ public class Drink {
     public String getStrDrink() { return strDrink; }
     /* @param strDrink */
     public void setStrDrink(String strDrink) { this.strDrink = strDrink; }
-/*
-    // @return Site description
-    public String getThumb() { return strDrinkThumb; }
-    // @param desc Site description
-    public void setThumb(String strDrinkThumb) { this.strDrinkThumb = strDrinkThumb; }
-*/
     public String getStrDrinkThumb() {return strDrinkThumb;}
     public void setStrDrinkThumb(String strDrinkThumb) {this.strDrinkThumb = strDrinkThumb;}
 
@@ -99,6 +93,9 @@ public class Drink {
 
     public String getDateModified() {return dateModified;}
     public void setDateModified(String dateModified) {this.dateModified = dateModified;}
+
+    public Drink getDrink(Drink drink) {return drink;}
+
 
     public String getStrIngredient1() {return strIngredient1;}
     public void setStrIngredient1(String strIngredient1) {this.strIngredient1 = strIngredient1;}
