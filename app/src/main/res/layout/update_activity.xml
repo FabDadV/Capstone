@@ -462,4 +462,6 @@
         app:layout_constraintStart_toEndOf="@+id/v_barrier"
         app:layout_constraintTop_toBottomOf="@+id/edit_mes14"/>
 
+    <!-- android:clickable="true" -->
+
 </android.support.constraint.ConstraintLayout>

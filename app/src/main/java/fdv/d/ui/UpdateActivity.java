@@ -3,10 +3,8 @@ package fdv.d.ui;
 import java.util.List;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -89,8 +87,6 @@ public class UpdateActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
 
-
-        ver = Integer.valueOf(idDrink) + 110000;
         CheckInVersion(idDrink);
 
         FloatingActionButton fab = findViewById(R.id.update_fab);
@@ -164,28 +160,22 @@ public class UpdateActivity extends AppCompatActivity {
     // Check in drink's version
     private void CheckInVersion(String id) {
         int i = Integer.valueOf(id);
-        int j = i<100000? 1 : 2;
         Log.d("TAG", "ID: " + String.valueOf(i));
-        final String s = id.substring(j);
+        final String s = id.substring(1,5);
         appExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                Log.d("TAG", "call checkByIdDrink(s)");
-                list = appDB.drinkDao().checkByIdDrink("%" + s);
+                Log.d("TAG", "call getListIdDrink(s)");
+                list = appDB.drinkDao().getListIdDrink(s + "%");
             }
         });
         Log.d("TAG", "list?");
-        if(list==null) {ver = i + 110000; return;}
-        int k = list.size();
-        if (k>0) {
-            int l = Integer.valueOf(list.get(k-1));
-            if(l>120000) {
-                int m = l/10000;
-                int n = l - m*10000;
-                ver = (m+1)*10000 + n;
-            }
-        } else {
-            ver = i + 110000;
+        if(list==null) {
+            ver = i*100 + 1; return;
+        }else {
+            int k = list.size();
+            i = Integer.valueOf(list.get(k - 1));
+            ver = i > 1000000? i + 1 : i * 100 + 1;
         }
         Log.d("TAG", "Ver: " + String.valueOf(ver));
     }
@@ -316,7 +306,7 @@ public class UpdateActivity extends AppCompatActivity {
    // Check in update drink
     private boolean diffDrinks() {
         boolean diff = false;
-        upDrink.setStrDrink(tvDrink.getText().toString()+ " v." + String.valueOf(ver));
+        upDrink.setStrDrink(tvDrink.getText().toString()+ " v." + String.valueOf(ver%100));
         String measure;
         measure = editMeasure1.getText().toString();
         if (!measure.equals(upDrink.getStrMeasure1())) {

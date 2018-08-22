@@ -61,21 +61,6 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
 
         obtainViewModel();
         Log.d("TAG", " obtained VM ");
-
-    /*
-     Set the Floating Action Button (FAB) to its corresponding View.
-     Attach an OnClickListener to it, so that when it's clicked, a new intent will be created
-     to launch the AddActivity.
-    */
-        FloatingActionButton fab = findViewById(R.id.fab_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to start an AddTaskActivity
-                Intent addIntent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(addIntent);
-            }
-        });
     }
     // Obtain Cocktail's information from internet
     private void obtainViewModel() {

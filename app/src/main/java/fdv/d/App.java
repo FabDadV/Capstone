@@ -19,7 +19,7 @@ public final class App extends Application {
     public static AppExecutors appExecutors;
     public static Context appContext;
     public static AppDB appDB;
-    public static String drinkType = "Optional_Alcohol";
+    public static String drinkType = "Favorite";
     public static boolean doReset = false;
 
     @Override
