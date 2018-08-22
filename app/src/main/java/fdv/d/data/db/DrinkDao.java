@@ -24,8 +24,11 @@ public interface DrinkDao {
     @Query("SELECT * FROM tab_drinks WHERE idDrink = :idDrink")
     Drink getByIdDrink(String idDrink);
 
-    @Query("SELECT * FROM tab_drinks WHERE idDrink LIKE ('%' + :s) ORDER BY idDrink")
-    List<Drink> checkByIdDrink(String s);
+    @Query("SELECT idDrink FROM tab_drinks WHERE idDrink LIKE :s ORDER BY idDrink")
+    List<String> checkByIdDrink(String s);
+
+    @Query("SELECT idDrink FROM tab_drinks WHERE idDrink LIKE ('9%') ORDER BY idDrink")
+    List<String> getListIdDrinks();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Drink> drinksList);
