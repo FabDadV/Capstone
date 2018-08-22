@@ -106,7 +106,7 @@ public class UpdateActivity extends AppCompatActivity {
                     });
                 }
                 Ingredients.addDelay(1000);
-//                finish();
+                finish();
             }
         });
     }
