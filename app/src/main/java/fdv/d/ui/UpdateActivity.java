@@ -26,6 +26,7 @@ import fdv.d.data.db.Drink;
 
 import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;
+import static fdv.d.App.drinkType;
 import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
 import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
@@ -33,6 +34,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     private List<String> list;
     private Drink drink, upDrink;
+    private String idDrink;
     private int ver;
 
     @BindView(R.id.iv_update) ImageView drinkView;
@@ -77,9 +79,9 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.update_activity);
         ButterKnife.bind(this);
 
-        String idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
+        idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
-        updateIngredients(idDrink);
+        updateIngredients();
 
         Picasso.get()
                 .load(pathDrink)
@@ -87,7 +89,7 @@ public class UpdateActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
 
-        CheckInVersion(idDrink);
+        CheckInVersion();
 
         FloatingActionButton fab = findViewById(R.id.update_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -114,31 +116,46 @@ public class UpdateActivity extends AppCompatActivity {
     }
     // Obtain Cocktail's detail information from internet by id:
     // https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
-    public void updateIngredients(String id) {
-        App.getApi().loadById(id).enqueue(new Callback<DrinksList>() {
-            @Override
-            public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
-                if (response.isSuccessful()) {
-                    Log.d("TAG","Update is Ok");
-                    drink = response.body().getList().get(0);
-                    tvDrink.setText(drink.getStrDrink());
-                    tvCategory.setText(drink.getStrCategory());
-                    tvInstruction.setText(drink.getStrInstructions());
-                    inflateIngredients(drink);
-                } else {
-                    Log.e("TAG", "response code " + response.code());
+    public void updateIngredients() {
+        if(drinkType.equals("Favorite")) {
+            appExecutors.diskIO().execute(new Runnable() {
+                @Override
+                public void run() {
+                    drink = appDB.drinkDao().getByIdDrink(idDrink);
+
                 }
-            }
-            @Override
-            public void onFailure(Call<DrinksList> call, Throwable t) {
-                Log.e("TAG", "API Error: " + t.toString());
-            }
-        });
+            });
+            tvDrink.setText(drink.getStrDrink());
+            tvCategory.setText(drink.getStrCategory());
+            tvInstruction.setText(drink.getStrInstructions());
+            inflateIngredients(drink);
+        } else {
+            App.getApi().loadById(idDrink).enqueue(new Callback<DrinksList>() {
+                @Override
+                public void onResponse(Call<DrinksList> call, Response<DrinksList> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("TAG", "Update is Ok");
+                        drink = response.body().getList().get(0);
+                        tvDrink.setText(drink.getStrDrink());
+                        tvCategory.setText(drink.getStrCategory());
+                        tvInstruction.setText(drink.getStrInstructions());
+                        inflateIngredients(drink);
+                    } else {
+                        Log.e("TAG", "response code " + response.code());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DrinksList> call, Throwable t) {
+                    Log.e("TAG", "API Error: " + t.toString());
+                }
+            });
+        }
     }
     // Check in drink with id is favorite
-    private boolean checkIsFav(String id) {
+    private boolean checkIsFav() {
 
-        Drink drink = appDB.drinkDao().getByIdDrink(id);
+        Drink drink = appDB.drinkDao().getByIdDrink(idDrink);
         Log.d("TAG", "checkIsFav" + String.valueOf(drink.getIdDrink()));
         /* return true if the cursor is not empty */
         boolean isFav = (drink!=null);
@@ -158,10 +175,10 @@ public class UpdateActivity extends AppCompatActivity {
     }
 */
     // Check in drink's version
-    private void CheckInVersion(String id) {
-        int i = Integer.valueOf(id);
+    private void CheckInVersion() {
+        int i = Integer.valueOf(idDrink);
         Log.d("TAG", "ID: " + String.valueOf(i));
-        final String s = id.substring(1,5);
+        final String s = idDrink.substring(0,5);
         appExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
