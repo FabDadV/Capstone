@@ -9,7 +9,10 @@
     <string name="strong_label">Strong</string>
     <string name="soft_label">Soft</string>
     <string name="health_label">Healthy</string>
-    <string name="ing_label">Ingredients</string>
+    <string name="name_label">Type Cocktail's name</string>
+    <string name="cat_label">Type Category</string>
+    <string name="text_label">Type Instruction</string>
+    <string name="ing_label">Ingredient</string>
     <string name="mes_label">Measure</string>
     <string name="fav_label">Favorite</string>
     <string name="add_fav">Add favorite</string>
