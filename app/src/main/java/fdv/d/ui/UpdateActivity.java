@@ -1,5 +1,7 @@
 package fdv.d.ui;
 
+import java.util.List;
+
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,21 +13,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.EditText;
-
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import fdv.d.App;
-import fdv.d.R;
-import fdv.d.data.api.DrinksList;
-import fdv.d.data.db.Drink;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import fdv.d.R;
+import fdv.d.App;
+import fdv.d.data.api.DrinksList;
+import fdv.d.data.db.Drink;
 
 import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;
@@ -34,9 +33,8 @@ import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    private List<Drink> list;
+    private List<String> list;
     private Drink drink, upDrink;
-    String idDrink;
     private int ver;
 
     @BindView(R.id.iv_update) ImageView drinkView;
@@ -81,7 +79,7 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.update_activity);
         ButterKnife.bind(this);
 
-        idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
+        String idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
         updateIngredients(idDrink);
 
@@ -91,7 +89,9 @@ public class UpdateActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
 
-        CheckInVersion();
+
+        ver = Integer.valueOf(idDrink) + 110000;
+        CheckInVersion(idDrink);
 
         FloatingActionButton fab = findViewById(R.id.update_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -162,27 +162,32 @@ public class UpdateActivity extends AppCompatActivity {
     }
 */
     // Check in drink's version
-    private void CheckInVersion() {
-        int id = Integer.valueOf(idDrink);
-        final int j = id<100000? 1 : 2;
+    private void CheckInVersion(String id) {
+        int i = Integer.valueOf(id);
+        int j = i<100000? 1 : 2;
+        Log.d("TAG", "ID: " + String.valueOf(i));
+        final String s = id.substring(j);
         appExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                String s = idDrink.substring(j);
-                list.addAll(appDB.drinkDao().checkByIdDrink(s));
+                Log.d("TAG", "call checkByIdDrink(s)");
+                list = appDB.drinkDao().checkByIdDrink("%" + s);
             }
         });
+        Log.d("TAG", "list?");
+        if(list==null) {ver = i + 110000; return;}
         int k = list.size();
         if (k>0) {
-            int l = Integer.valueOf(list.get(k).getIdDrink());
+            int l = Integer.valueOf(list.get(k-1));
             if(l>120000) {
                 int m = l/10000;
-                int i = l - m*10000;
-                ver = (m+1)*10000 +i;
+                int n = l - m*10000;
+                ver = (m+1)*10000 + n;
             }
         } else {
-            ver = id + 110000;
+            ver = i + 110000;
         }
+        Log.d("TAG", "Ver: " + String.valueOf(ver));
     }
     // Inflate ingredients information
     private void inflateIngredients(Drink drink) {
@@ -190,28 +195,28 @@ public class UpdateActivity extends AppCompatActivity {
         Resources resources = this.getResources();
         int color = resources.getColor(R.color.colorPrimaryLight);
         Log.d("TAG"," inflate Ings" + drink.getStrIngredient1());
-        if(checkEmpty(drink.getStrIngredient1(), drink.getStrMeasure1())) {
+        if(checkEmpty(drink.getStrIngredient1()) && checkEmpty(drink.getStrMeasure1())) {
             tvIngredient1.setVisibility(View.INVISIBLE);
             editMeasure1.setVisibility(View.INVISIBLE);
         }else{
             tvIngredient1.setText(drink.getStrIngredient1());
             editMeasure1.setText(drink.getStrMeasure1());
         }
-        if(checkEmpty(drink.getStrIngredient2(), drink.getStrMeasure2())) {
+        if(checkEmpty(drink.getStrIngredient2()) && checkEmpty(drink.getStrMeasure2())) {
             tvIngredient2.setVisibility(View.INVISIBLE);
             editMeasure2.setVisibility(View.INVISIBLE);
         }else {
             tvIngredient2.setText(drink.getStrIngredient2());
             editMeasure2.setText(drink.getStrMeasure2());
         }
-        if(checkEmpty(drink.getStrIngredient3(), drink.getStrMeasure3())) {
+        if(checkEmpty(drink.getStrIngredient3()) && checkEmpty(drink.getStrMeasure3())) {
             tvIngredient3.setVisibility(View.INVISIBLE);
             editMeasure3.setVisibility(View.INVISIBLE);
         }else {
             tvIngredient3.setText(drink.getStrIngredient3());
             editMeasure3.setText(drink.getStrMeasure3());
         }
-        if(checkEmpty(drink.getStrIngredient4(), drink.getStrMeasure4())) {
+        if(checkEmpty(drink.getStrIngredient4()) && checkEmpty(drink.getStrMeasure4())) {
             tvIngredient4.setVisibility(View.GONE);
             editMeasure4.setVisibility(View.GONE);
             editMeasure4.setBackgroundColor(color);
@@ -219,7 +224,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient4.setText(drink.getStrIngredient4());
             editMeasure4.setText(drink.getStrMeasure4());
         }
-        if(checkEmpty(drink.getStrIngredient5(), drink.getStrMeasure5())) {
+        if(checkEmpty(drink.getStrIngredient5()) && checkEmpty(drink.getStrMeasure5())) {
             tvIngredient5.setVisibility(View.GONE);
             editMeasure5.setVisibility(View.GONE);
             editMeasure5.setBackgroundColor(color);
@@ -227,7 +232,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient5.setText(drink.getStrIngredient5());
             editMeasure5.setText(drink.getStrMeasure5());
         }
-        if(checkEmpty(drink.getStrIngredient6(), drink.getStrMeasure6())) {
+        if(checkEmpty(drink.getStrIngredient6()) && checkEmpty(drink.getStrMeasure6())) {
             tvIngredient6.setVisibility(View.GONE);
             editMeasure6.setVisibility(View.GONE);
             editMeasure6.setBackgroundColor(color);
@@ -235,7 +240,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient6.setText(drink.getStrIngredient6());
             editMeasure6.setText(drink.getStrMeasure6());
         }
-        if(checkEmpty(drink.getStrIngredient7(), drink.getStrMeasure7())) {
+        if(checkEmpty(drink.getStrIngredient7()) && checkEmpty(drink.getStrMeasure7())) {
             tvIngredient7.setVisibility(View.GONE);
             editMeasure7.setVisibility(View.GONE);
             editMeasure7.setBackgroundColor(color);
@@ -243,7 +248,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient7.setText(drink.getStrIngredient7());
             editMeasure7.setText(drink.getStrMeasure7());
         }
-        if(checkEmpty(drink.getStrIngredient8(), drink.getStrMeasure8())) {
+        if(checkEmpty(drink.getStrIngredient8()) && checkEmpty(drink.getStrMeasure8())) {
             tvIngredient8.setVisibility(View.GONE);
             editMeasure8.setVisibility(View.GONE);
             editMeasure8.setBackgroundColor(color);
@@ -251,7 +256,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient8.setText(drink.getStrIngredient8());
             editMeasure8.setText(drink.getStrMeasure8());
         }
-        if(checkEmpty(drink.getStrIngredient9(), drink.getStrMeasure9())) {
+        if(checkEmpty(drink.getStrIngredient9()) && checkEmpty(drink.getStrMeasure9())) {
             tvIngredient9.setVisibility(View.GONE);
             editMeasure9.setVisibility(View.GONE);
             editMeasure9.setBackgroundColor(color);
@@ -259,7 +264,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient9.setText(drink.getStrIngredient9());
             editMeasure9.setText(drink.getStrMeasure9());
         }
-        if(checkEmpty(drink.getStrIngredient10(), drink.getStrMeasure10())) {
+        if(checkEmpty(drink.getStrIngredient10()) && checkEmpty(drink.getStrMeasure10())) {
             tvIngredient10.setVisibility(View.GONE);
             editMeasure10.setVisibility(View.GONE);
             editMeasure10.setBackgroundColor(color);
@@ -267,7 +272,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient10.setText(drink.getStrIngredient10());
             editMeasure10.setText(drink.getStrMeasure10());
         }
-        if(checkEmpty(drink.getStrIngredient11(), drink.getStrMeasure11())) {
+        if(checkEmpty(drink.getStrIngredient11()) && checkEmpty(drink.getStrMeasure11())) {
             tvIngredient11.setVisibility(View.GONE);
             editMeasure11.setVisibility(View.GONE);
             editMeasure11.setBackgroundColor(color);
@@ -275,7 +280,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient11.setText(drink.getStrIngredient11());
             editMeasure11.setText(drink.getStrMeasure11());
         }
-        if(checkEmpty(drink.getStrIngredient12(), drink.getStrMeasure12())) {
+        if(checkEmpty(drink.getStrIngredient12()) && checkEmpty(drink.getStrMeasure12())) {
             tvIngredient12.setVisibility(View.GONE);
             editMeasure12.setVisibility(View.GONE);
             editMeasure12.setBackgroundColor(color);
@@ -283,7 +288,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient12.setText(drink.getStrIngredient12());
             editMeasure12.setText(drink.getStrMeasure12());
         }
-        if(checkEmpty(drink.getStrIngredient13(), drink.getStrMeasure13())) {
+        if(checkEmpty(drink.getStrIngredient13()) && checkEmpty(drink.getStrMeasure13())) {
             tvIngredient13.setVisibility(View.GONE);
             editMeasure13.setVisibility(View.GONE);
             editMeasure13.setBackgroundColor(color);
@@ -291,7 +296,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient13.setText(drink.getStrIngredient13());
             editMeasure13.setText(drink.getStrMeasure13());
         }
-        if(checkEmpty(drink.getStrIngredient14(), drink.getStrMeasure14())) {
+        if(checkEmpty(drink.getStrIngredient14()) && checkEmpty(drink.getStrMeasure14())) {
             tvIngredient14.setVisibility(View.GONE);
             editMeasure14.setVisibility(View.GONE);
             editMeasure14.setBackgroundColor(color);
@@ -299,7 +304,7 @@ public class UpdateActivity extends AppCompatActivity {
             tvIngredient14.setText(drink.getStrIngredient14());
             editMeasure14.setText(drink.getStrMeasure14());
         }
-        if(checkEmpty(drink.getStrIngredient15(), drink.getStrMeasure15())) {
+        if(checkEmpty(drink.getStrIngredient15()) && checkEmpty(drink.getStrMeasure15())) {
             tvIngredient15.setVisibility(View.GONE);
             editMeasure15.setVisibility(View.GONE);
             editMeasure15.setBackgroundColor(color);
@@ -308,14 +313,10 @@ public class UpdateActivity extends AppCompatActivity {
             editMeasure15.setText(drink.getStrMeasure15());
         }
     }
-
-    private boolean checkEmpty(String t, String m) {
-        return (t.equals("") || t.equals(" ") || t.equals("\n")) &&
-                (m.equals("") || m.equals(" ") || m.equals("\n"));
-    }
-    // Check in update drink
+   // Check in update drink
     private boolean diffDrinks() {
         boolean diff = false;
+        upDrink.setStrDrink(tvDrink.getText().toString()+ " v." + String.valueOf(ver));
         String measure;
         measure = editMeasure1.getText().toString();
         if (!measure.equals(upDrink.getStrMeasure1())) {
@@ -395,4 +396,7 @@ public class UpdateActivity extends AppCompatActivity {
         return diff;
     }
 
+    public static boolean checkEmpty(String s) {
+        return (s.equals("") || s.equals(" ") || s.equals("\n"));
+    }
 }

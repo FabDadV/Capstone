@@ -8,13 +8,13 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import fdv.d.App;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import fdv.d.data.api.DrinksList;
+import fdv.d.App;
 import fdv.d.data.db.Drink;
+import fdv.d.data.api.DrinksList;
 
 import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;

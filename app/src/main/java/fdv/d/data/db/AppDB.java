@@ -29,5 +29,4 @@ public abstract class AppDB extends RoomDatabase {
         Log.d("TAG", "AppDB: Getting the DB instance");
         return appDB;
     }
-    /* Queries should be done in a separate thread to avoid locking the UI.*/
 }

@@ -15,17 +15,20 @@ public interface DrinkDao {
     @Query("SELECT * FROM tab_drinks WHERE id = :id")
     Drink getById(int id);
 */
-    @Query("SELECT * FROM tab_drinks ORDER BY idDrink")
+    @Query("SELECT * FROM tab_drinks ORDER BY strDrink")
     List<Drink> getAll();
 
     @Query("SELECT * FROM tab_drinks")
     LiveData<List<Drink>> loadAll();
 
-    @Query("SELECT * FROM tab_drinks WHERE idDrink LIKE ('%' + :s)")
-    Drink getByIdDrink(String s);
+    @Query("SELECT * FROM tab_drinks WHERE idDrink = :idDrink")
+    Drink getByIdDrink(String idDrink);
 
-    @Query("SELECT * FROM tab_drinks WHERE idDrink LIKE :idDrink ORDER BY idDrink")
-    List<Drink> checkByIdDrink(String idDrink);
+    @Query("SELECT idDrink FROM tab_drinks WHERE idDrink LIKE :s ORDER BY idDrink")
+    List<String> checkByIdDrink(String s);
+
+    @Query("SELECT idDrink FROM tab_drinks WHERE idDrink LIKE ('9%') ORDER BY idDrink")
+    List<String> getListIdDrinks();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Drink> drinksList);
