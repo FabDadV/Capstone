@@ -19,6 +19,20 @@
         app:layout_constraintEnd_toStartOf="@+id/gl_vertical"
         app:srcCompat="@drawable/ic_camera"/>
 
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"/>
+
     <EditText
         android:id="@+id/edit_drink"
         android:layout_width="wrap_content"
@@ -46,20 +60,6 @@
         android:inputType="text"
         android:textSize="@dimen/edit_size"
         app:layout_constraintTop_toBottomOf="@id/edit_drink"/>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/gl_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/gl_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4"/>
 
     <android.support.constraint.Barrier
         android:id="@+id/h_barrier"
@@ -98,11 +98,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_save"/>
 
+    <TextView
+        android:id="@+id/tv_ings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"/>
+
     <EditText
         android:id="@+id/edit_ing1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin"
         android:layout_marginStart="@dimen/margin"
         android:background="@color/colorSecondLight"
         android:ems="10"
@@ -111,7 +119,7 @@
         android:inputType="text"
         android:textSize="@dimen/edit_size"
         app:layout_constraintStart_toEndOf="@+id/gl_vertical"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_ings"/>
 
     <EditText
         android:id="@+id/edit_ing2"
@@ -309,11 +317,19 @@
         app:layout_constraintStart_toEndOf="@+id/gl_vertical"
         app:layout_constraintTop_toBottomOf="@+id/edit_ing14"/>
 
+    <TextView
+        android:id="@+id/tv_mes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/mes_label"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"/>
+
     <EditText
         android:id="@+id/edit_mes1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin"
         android:layout_marginStart="@dimen/margin"
         android:background="@color/colorSecondLight"
         android:ems="10"
@@ -322,7 +338,7 @@
         android:inputType="text"
         android:textSize="@dimen/edit_size"
         app:layout_constraintStart_toEndOf="@+id/v_barrier"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes"/>
 
     <EditText
         android:id="@+id/edit_mes2"
