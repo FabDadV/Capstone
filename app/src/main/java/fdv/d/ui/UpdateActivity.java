@@ -122,7 +122,6 @@ public class UpdateActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     drink = appDB.drinkDao().getByIdDrink(idDrink);
-
                 }
             });
             tvDrink.setText(drink.getStrDrink());
