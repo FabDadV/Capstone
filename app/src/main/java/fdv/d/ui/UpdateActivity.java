@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import com.squareup.picasso.Picasso;
 
+import fdv.d.utils.Ingredients;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,8 +96,6 @@ public class UpdateActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                upDrink = new Drink().getDrink(drink);
-                Log.d("TAG", "getDrink: " + upDrink.getIdDrink());
                 if(diffDrinks()) {
                     upDrink.setIdDrink(String.valueOf(ver));
                     appExecutors.diskIO().execute(new Runnable() {
@@ -106,11 +105,8 @@ public class UpdateActivity extends AppCompatActivity {
                         }
                     });
                 }
+                Ingredients.addDelay(1000);
 //                finish();
-/*
-                Snackbar.make(view, "Save Coctail's version", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-*/
             }
         });
     }
@@ -124,6 +120,7 @@ public class UpdateActivity extends AppCompatActivity {
                     drink = appDB.drinkDao().getByIdDrink(idDrink);
                 }
             });
+            Ingredients.addDelay(1000);
             tvDrink.setText(drink.getStrDrink());
             tvCategory.setText(drink.getStrCategory());
             tvInstruction.setText(drink.getStrInstructions());
@@ -322,7 +319,10 @@ public class UpdateActivity extends AppCompatActivity {
    // Check in update drink
     private boolean diffDrinks() {
         boolean diff = false;
-        upDrink.setStrDrink(tvDrink.getText().toString()+ " v." + String.valueOf(ver%100));
+        upDrink = new Drink().getDrink(drink);
+        String v = getVer();
+        upDrink.setStrDrink(v);
+        Log.d("TAG", "getDrink: " + upDrink.getIdDrink());
         String measure;
         measure = editMeasure1.getText().toString();
         if (!measure.equals(upDrink.getStrMeasure1())) {
@@ -401,8 +401,21 @@ public class UpdateActivity extends AppCompatActivity {
         }
         return diff;
     }
+    private String getVer() {
+        String v = drink.getStrDrink();
+        int j = v.length();
+        int i = Integer.valueOf(drink.getIdDrink());
+        if(i>1000000){
+            v = v.substring(0,j-7);
+            j = i%100 +1;
+            v = j<10?v + "   v.0" + String.valueOf(j) : v + "   v." + String.valueOf(j);
+        } else {
+            v = v + "   v.01";
+        }
+        return v;
+    }
 
-    public static boolean checkEmpty(String s) {
+    private static boolean checkEmpty(String s) {
         return (s.equals("") || s.equals(" ") || s.equals("\n"));
     }
 }

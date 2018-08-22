@@ -40,5 +40,10 @@ public class Ingredients {
     return s;
     }
 
-
+    public static void addDelay(int m) {
+        try {
+            Thread.sleep(m);
+        } catch (InterruptedException ignored) {
+        }
+    }
 }

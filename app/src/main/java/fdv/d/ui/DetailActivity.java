@@ -115,7 +115,7 @@ public class DetailActivity extends AppCompatActivity {
                 drink = appDB.drinkDao().getByIdDrink(idDrink);
             }
         });
-        addDelay();
+        Ingredients.addDelay(2000);
         Log.d("TAG","Load Drink is Ok");
         String s = Ingredients.getIngregientsList(drink);
         tvIngredients.setText(s);
@@ -182,12 +182,4 @@ public class DetailActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    private static void addDelay() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ignored) {
-        }
-    }
-
 }
