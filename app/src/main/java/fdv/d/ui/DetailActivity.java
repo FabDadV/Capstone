@@ -18,6 +18,11 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.squareup.picasso.Picasso;
 
 import fdv.d.R;
@@ -37,25 +42,20 @@ public class DetailActivity extends AppCompatActivity {
 
     private Drink drink;
     private String idDrink;
+    private AdView adView;
 
     @BindView(R.id.iv_drink) ImageView drinkView;
     @BindView(R.id.tv_drink) TextView tvDrink;
     @BindView(R.id.tv_cat) TextView tvCategory;
     @BindView(R.id.tv_ings) TextView tvIngredients;
-    @BindView(R.id.tv_text) TextView tvInstruction;
+//    @BindView(R.id.tv_text) TextView tvInstruction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_acrivity);
         ButterKnife.bind(this);
-/*
-        ImageView drinkView = findViewById(R.id.iv_drink);
-        tvDrink = findViewById(R.id.tv_drink);
-        tvCategory = findViewById(R.id.tv_cat);
-        tvIngredients = findViewById(R.id.tv_ings);
-        tvInstruction = findViewById(R.id.tv_text);
-*/
+
         idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
         if(drinkType.equals("Favorite")) {
@@ -70,6 +70,11 @@ public class DetailActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
 
+        adView = findViewById(R.id.adView);
+        // Create an ad request
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         FloatingActionButton fab = findViewById(R.id.edit_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +84,7 @@ public class DetailActivity extends AppCompatActivity {
                 updateIntent.putExtra(EXTRA_ID_DRINK, drink.getIdDrink());
                 updateIntent.putExtra(EXTRA_PATH, drink.getStrDrinkThumb());
                 startActivity(updateIntent);
+                finish();
             }
         });
     }
@@ -96,7 +102,7 @@ public class DetailActivity extends AppCompatActivity {
                     tvIngredients.setText(s);
                     tvDrink.setText(drink.getStrDrink());
                     tvCategory.setText(drink.getStrCategory());
-                    tvInstruction.setText(drink.getStrInstructions());
+//                    tvInstruction.setText(drink.getStrInstructions());
                 } else {
                     Log.e("TAG", "response code " + response.code());
                 }
@@ -121,7 +127,7 @@ public class DetailActivity extends AppCompatActivity {
         tvIngredients.setText(s);
         tvDrink.setText(drink.getStrDrink());
         tvCategory.setText(drink.getStrCategory());
-        tvInstruction.setText(drink.getStrInstructions());
+//        tvInstruction.setText(drink.getStrInstructions());
     }
     // Check in drink with id is favorite
     private boolean checkIsFav(String id) {

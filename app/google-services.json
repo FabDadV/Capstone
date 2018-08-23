@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "709938460740",
+    "firebase_url": "https://homecocktails-cbd97.firebaseio.com",
+    "project_id": "homecocktails-cbd97",
+    "storage_bucket": "homecocktails-cbd97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709938460740:android:c293525931811661",
+        "android_client_info": {
+          "package_name": "fdv.d"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709938460740-5keh1qvcc905837hon1tt6r9k4fbcq4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANwFaap3gn1qTFaxxWWMr4roAP9WSqDlM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

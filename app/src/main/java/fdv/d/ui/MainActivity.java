@@ -109,11 +109,11 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.strong_item:
-                Log.d("TAG", " strong ");
+            case R.id.health_item:
+                Log.d("TAG", " healthy ");
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
-                if(item.isEnabled()) drinkType = "Alcoholic";
+                if(item.isEnabled()) drinkType = "Optional_Alcohol";
                 doReset = true;
                 obtainViewModel();
                 return true;
@@ -125,11 +125,11 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
                 doReset = true;
                 obtainViewModel();
                 return true;
-            case R.id.health_item:
-                Log.d("TAG", " healthy ");
+            case R.id.strong_item:
+                Log.d("TAG", " strong ");
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
-                if(item.isEnabled()) drinkType = "Optional_Alcohol";
+                if(item.isEnabled()) drinkType = "Alcoholic";
                 doReset = true;
                 obtainViewModel();
                 return true;

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.facebook.stetho.Stetho;
+import com.google.android.gms.ads.MobileAds;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -38,6 +39,7 @@ public final class App extends Application {
         appDB = AppDB.getInstance();
 
         Stetho.initializeWithDefaults(this);
+//        MobileAds.initialize(this, "ca-app-pub-2448051017659216~5516415096");
 
     }
     public static QueryApi getApi() { return queryApi; }
