@@ -48,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.tv_drink) TextView tvDrink;
     @BindView(R.id.tv_cat) TextView tvCategory;
     @BindView(R.id.tv_ings) TextView tvIngredients;
-//    @BindView(R.id.tv_text) TextView tvInstruction;
+    @BindView(R.id.tv_text) TextView tvInstruction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,6 @@ public class DetailActivity extends AppCompatActivity {
         idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
         if(drinkType.equals("Favorite")) {
-            Log.d("TAG","Drink from DB");
             loadDrink();
         } else {
             obtainDrink();
@@ -98,11 +97,10 @@ public class DetailActivity extends AppCompatActivity {
                     Log.d("TAG","API is Ok");
                     drink = response.body().getList().get(0);
                     String s = Ingredients.getIngregientsList(drink);
-//                    Log.d("TAG","Ings: " + s);
                     tvIngredients.setText(s);
                     tvDrink.setText(drink.getStrDrink());
                     tvCategory.setText(drink.getStrCategory());
-//                    tvInstruction.setText(drink.getStrInstructions());
+                    tvInstruction.setText(drink.getStrInstructions());
                 } else {
                     Log.e("TAG", "response code " + response.code());
                 }
@@ -127,7 +125,7 @@ public class DetailActivity extends AppCompatActivity {
         tvIngredients.setText(s);
         tvDrink.setText(drink.getStrDrink());
         tvCategory.setText(drink.getStrCategory());
-//        tvInstruction.setText(drink.getStrInstructions());
+        tvInstruction.setText(drink.getStrInstructions());
     }
     // Check in drink with id is favorite
     private boolean checkIsFav(String id) {
@@ -174,6 +172,7 @@ public class DetailActivity extends AppCompatActivity {
 //                if(!checkIsFav(drink.getIdDrink()))
                 Log.d("TAG", "deleteFav" + drinkType.toString() + drink.getIdDrink().toString());
                 if(drinkType.equals("Favorite")) {deleteFav();}
+                finish();
                 return true;
             case R.id.add_widget:
                 String name = tvDrink.getText().toString();

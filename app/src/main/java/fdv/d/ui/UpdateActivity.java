@@ -35,7 +35,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     private List<String> list;
     private Drink drink, upDrink;
-    private String idDrink;
+    private String idDrink, newDrink;
     private int ver;
 
     @BindView(R.id.iv_update) ImageView drinkView;
@@ -90,14 +90,12 @@ public class UpdateActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
 
-        CheckInVersion();
-
         FloatingActionButton fab = findViewById(R.id.update_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CheckInVersion();
                 if(diffDrinks()) {
-                    upDrink.setIdDrink(String.valueOf(ver));
                     appExecutors.diskIO().execute(new Runnable() {
                         @Override
                         public void run() {
@@ -173,6 +171,7 @@ public class UpdateActivity extends AppCompatActivity {
     // Check in drink's version
     private void CheckInVersion() {
         int i = Integer.valueOf(idDrink);
+        String name = tvDrink.getText().toString();
         Log.d("TAG", "ID: " + String.valueOf(i));
         final String s = idDrink.substring(0,5);
         appExecutors.diskIO().execute(new Runnable() {
@@ -184,11 +183,20 @@ public class UpdateActivity extends AppCompatActivity {
         });
         Log.d("TAG", "list?");
         if(list==null) {
-            ver = i*100 + 1; return;
+            ver = i*100 + 1;
+            newDrink  = name + "   v.01";
+            return;
         }else {
             int k = list.size();
-            i = Integer.valueOf(list.get(k - 1));
-            ver = i > 1000000? i + 1 : i * 100 + 1;
+            int m = Integer.valueOf(list.get(k - 1));
+            ver = m > 1000000 ? (m + 1) : (m * 100 + 1);
+            if(i > 1000000) {
+                int j = name.length();
+                name = name.substring(0,j-7);
+            };
+            m = ver%100;
+            name = m<10? (name + "   v.0") : (name + "   v.");
+            newDrink = name + String.valueOf(m);
         }
         Log.d("TAG", "Ver: " + String.valueOf(ver));
     }
@@ -320,8 +328,8 @@ public class UpdateActivity extends AppCompatActivity {
     private boolean diffDrinks() {
         boolean diff = false;
         upDrink = new Drink().getDrink(drink);
-        String v = getVer();
-        upDrink.setStrDrink(v);
+        upDrink.setIdDrink(String.valueOf(ver));
+        upDrink.setStrDrink(newDrink);
         Log.d("TAG", "getDrink: " + upDrink.getIdDrink());
         String measure;
         measure = editMeasure1.getText().toString();
@@ -400,19 +408,6 @@ public class UpdateActivity extends AppCompatActivity {
             diff = true;
         }
         return diff;
-    }
-    private String getVer() {
-        String v = drink.getStrDrink();
-        int j = v.length();
-        int i = Integer.valueOf(drink.getIdDrink());
-        if(i>1000000){
-            v = v.substring(0,j-7);
-            j = i%100 +1;
-            v = j<10?v + "   v.0" + String.valueOf(j) : v + "   v." + String.valueOf(j);
-        } else {
-            v = v + "   v.01";
-        }
-        return v;
     }
 
     private static boolean checkEmpty(String s) {
