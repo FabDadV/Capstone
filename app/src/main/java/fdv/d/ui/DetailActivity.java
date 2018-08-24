@@ -69,6 +69,8 @@ public class DetailActivity extends AppCompatActivity {
                 .error(R.drawable.err_drink)
                 .into(drinkView);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         adView = findViewById(R.id.adView);
         // Create an ad request
         AdRequest adRequest = new AdRequest.Builder().build();
