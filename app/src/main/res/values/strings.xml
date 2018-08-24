@@ -9,7 +9,7 @@
     <string name="strong_label">Strong</string>
     <string name="soft_label">Soft</string>
     <string name="health_label">Healthy</string>
-    <string name="name_label">Type Cocktail's name</string>
+    <string name="name_label">Type Cocktail name</string>
     <string name="cat_label">Type Category</string>
     <string name="text_label">Type Instruction</string>
     <string name="ing_label">Ingredient</string>
@@ -19,8 +19,7 @@
     <string name="not_fav">Not favorite</string>
     <string name="search_label">Search</string>
     <string name="search_action">Search</string>
-    <string name="text">Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-         bla bla bla bla bla bla bla bla bla bla</string>
+    <string name="text">Mix Mix Mix</string>
     <string name="widget_text">Cocktail</string>
     <string name="add_widget">Add widget</string>
 
