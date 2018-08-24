@@ -28,6 +28,7 @@ import fdv.d.data.db.Drink;
 import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;
 import static fdv.d.App.drinkType;
+import static fdv.d.App.FAVORITE;
 import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
 import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
@@ -111,7 +112,7 @@ public class UpdateActivity extends AppCompatActivity {
     // Obtain Cocktail's detail information from internet by id:
     // https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
     public void updateIngredients() {
-        if(drinkType.equals("Favorite")) {
+        if(drinkType.equals(FAVORITE)) {
             appExecutors.diskIO().execute(new Runnable() {
                 @Override
                 public void run() {

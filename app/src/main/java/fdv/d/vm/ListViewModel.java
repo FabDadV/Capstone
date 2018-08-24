@@ -20,6 +20,7 @@ import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;
 import static fdv.d.App.doReset;
 import static fdv.d.App.drinkType;
+import static fdv.d.App.FAVORITE;
 
 public class ListViewModel extends AndroidViewModel {
 // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic,Non_Alcoholic,Optional_Alcohol
@@ -34,7 +35,7 @@ public class ListViewModel extends AndroidViewModel {
         {
             listLiveData = new MutableLiveData<>();
 
-            if(drinkType.equals("Favorite")) {
+            if(drinkType.equals(FAVORITE)) {
                 appExecutors.diskIO().execute(new Runnable() {
                     @Override
                     public void run() {

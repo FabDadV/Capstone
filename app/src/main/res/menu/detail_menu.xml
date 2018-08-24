@@ -10,7 +10,7 @@
         android:orderInCategory="100"
         android:icon="@drawable/not_fav"
         android:title="@string/not_fav"
-        android:visible="true"
+        android:visible="false"
         app:showAsAction="always" />
 
     <item

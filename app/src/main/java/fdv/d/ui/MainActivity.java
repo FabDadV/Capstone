@@ -29,6 +29,10 @@ import fdv.d.vm.ListViewModel;
 
 import static fdv.d.App.doReset;
 import static fdv.d.App.drinkType;
+import static fdv.d.App.FAVORITE;
+import static fdv.d.App.HEALTHY_TYPE;
+import static fdv.d.App.SOFT_TYPE;
+import static fdv.d.App.STRONG_TYPE;
 import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
 
@@ -113,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
                 Log.d("TAG", " healthy ");
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
-                if(item.isEnabled()) drinkType = "Optional_Alcohol";
+                if(item.isEnabled()) drinkType = HEALTHY_TYPE;
                 doReset = true;
                 obtainViewModel();
                 return true;
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
                 Log.d("TAG", " soft ");
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
-                if(item.isEnabled()) drinkType = "Non_Alcoholic";
+                if(item.isEnabled()) drinkType = SOFT_TYPE;
                 doReset = true;
                 obtainViewModel();
                 return true;
@@ -129,12 +133,12 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
                 Log.d("TAG", " strong ");
                 if (item.isChecked()) item.setChecked(false);
                 else item.setChecked(true);
-                if(item.isEnabled()) drinkType = "Alcoholic";
+                if(item.isEnabled()) drinkType = STRONG_TYPE;
                 doReset = true;
                 obtainViewModel();
                 return true;
             case R.id.fav_search:
-                drinkType = "Favorite";
+                drinkType = FAVORITE;
                 doReset = true;
                 obtainViewModel();
                 return true;

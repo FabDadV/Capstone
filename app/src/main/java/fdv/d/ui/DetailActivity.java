@@ -35,6 +35,7 @@ import fdv.d.widget.DrinkWidget;
 import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;
 import static fdv.d.App.drinkType;
+import static fdv.d.App.FAVORITE;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID_DRINK = "id_drink";
@@ -58,7 +59,7 @@ public class DetailActivity extends AppCompatActivity {
 
         idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
-        if(drinkType.equals("Favorite")) {
+        if(drinkType.equals(FAVORITE)) {
             loadDrink();
         } else {
             obtainDrink();
@@ -162,6 +163,15 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);
+        MenuItem fav = menu.findItem(R.id.fav);
+        MenuItem notFav = menu.findItem(R.id.not_fav);
+        if(drinkType.equals(FAVORITE)) {
+            fav.setVisible(false);
+            notFav.setVisible(true);
+        } else {
+            fav.setVisible(true);
+            notFav.setVisible(false);
+        }
         return true;
     }
     @Override
@@ -173,7 +183,7 @@ public class DetailActivity extends AppCompatActivity {
             case R.id.not_fav:
 //                if(!checkIsFav(drink.getIdDrink()))
                 Log.d("TAG", "deleteFav" + drinkType.toString() + drink.getIdDrink().toString());
-                if(drinkType.equals("Favorite")) {deleteFav();}
+                if(drinkType.equals(FAVORITE)) {deleteFav();}
                 finish();
                 return true;
             case R.id.add_widget:
@@ -189,4 +199,5 @@ public class DetailActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

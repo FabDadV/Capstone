@@ -14,14 +14,19 @@ import fdv.d.data.db.AppDB;
 import fdv.d.data.api.QueryApi;
 // Android Application class. Used for accessing singletons.
 public final class App extends Application {
-    // https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic Non_Alcoholic Optional_Alcohol
+// Favorite https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic Non_Alcoholic Optional_Alcohol
     private static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/";
-    private static QueryApi queryApi;
+    public static final String HEALTHY_TYPE = "Optional_Alcohol";
+    public static final String SOFT_TYPE = "Non_Alcoholic";
+    public static final String STRONG_TYPE = "Alcoholic";
+    public static final String FAVORITE = "Favorite";
+
     public static AppExecutors appExecutors;
     public static Context appContext;
     public static AppDB appDB;
-    public static String drinkType = "Favorite";
+    public static String drinkType = HEALTHY_TYPE;
     public static boolean doReset = false;
+    private static QueryApi queryApi;
 
     @Override
     public void onCreate() {
