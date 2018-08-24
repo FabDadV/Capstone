@@ -1,7 +1,7 @@
 <resources>
-    <dimen name="edit_ems">12</dimen>
-    <dimen name="edit_size">10sp</dimen>
-    <dimen name="text_size">12sp</dimen>
+    <dimen name="edit_size">12sp</dimen>
+    <dimen name="text_size">14sp</dimen>
+    <dimen name="title_size">24sp</dimen>
     <dimen name="text_widget_size">10sp</dimen>
 
     <dimen name="margin">8dp</dimen>
@@ -10,6 +10,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="thumb_margin">120dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="image_height">280dp</dimen>
 
     <dimen name="padding">8dp</dimen>
     <dimen name="big_padding">64dp</dimen>

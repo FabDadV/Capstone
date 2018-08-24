@@ -20,9 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.squareup.picasso.Picasso;
 
 import fdv.d.R;
@@ -54,7 +52,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_acrivity);
+        setContentView(R.layout.detail_activity);
         ButterKnife.bind(this);
 
         idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
@@ -181,7 +179,6 @@ public class DetailActivity extends AppCompatActivity {
                 saveFav();
                 return true;
             case R.id.not_fav:
-//                if(!checkIsFav(drink.getIdDrink()))
                 Log.d("TAG", "deleteFav" + drinkType.toString() + drink.getIdDrink().toString());
                 if(drinkType.equals(FAVORITE)) {deleteFav();}
                 finish();
@@ -199,5 +196,4 @@ public class DetailActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

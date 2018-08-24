@@ -104,7 +104,7 @@ public class UpdateActivity extends AppCompatActivity {
                         }
                     });
                 }
-                Ingredients.addDelay(1000);
+                Ingredients.addDelay(2000);
                 finish();
             }
         });
@@ -182,6 +182,7 @@ public class UpdateActivity extends AppCompatActivity {
                 list = appDB.drinkDao().getListIdDrink(s + "%");
             }
         });
+        Ingredients.addDelay(1000);
         Log.d("TAG", "list?");
         if(list==null) {
             ver = i*100 + 1;
