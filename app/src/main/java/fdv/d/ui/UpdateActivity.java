@@ -84,6 +84,7 @@ public class UpdateActivity extends AppCompatActivity {
         idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
         String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
         updateIngredients();
+//        updateFav();
 
         Picasso.get()
                 .load(pathDrink)
@@ -145,6 +146,8 @@ public class UpdateActivity extends AppCompatActivity {
                     Log.e("TAG", "API Error: " + t.toString());
                 }
             });
+            Ingredients.addDelay(4000);
+            Log.d("TAG", "ApiDrink: " + drink.getStrDrink());
         }
     }
     // Check in drink with id is favorite
@@ -158,9 +161,7 @@ public class UpdateActivity extends AppCompatActivity {
         return isFav;
     }
     // Save Favorite cocktail information to the local database
-/*
     private void updateFav() {
-        Log.d("TAG", "updateFav: " + String.valueOf(drink.getIdDrink()));
         appExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
@@ -168,7 +169,6 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
     }
-*/
     // Check in drink's version
     private void CheckInVersion() {
         int i = Integer.valueOf(idDrink);
