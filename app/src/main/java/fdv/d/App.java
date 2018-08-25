@@ -32,6 +32,8 @@ public final class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL) //Базовая часть адреса
                 .addConverterFactory(GsonConverterFactory.create()) //Конвертер JSON'а в объекты Gson

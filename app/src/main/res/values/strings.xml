@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">HomeCoctails</string>
-    <string name="tv_id">N1</string>
-    <string name="tv_name">Very delicious drink</string>
-    <string name="tv_thumb">thumb</string>
-    <string name="title_add">Add</string>
+    <string name="tv_id">Cocktail ID </string>
+    <string name="tv_name">Cocktail name</string>
+    <string name="tv_thumb">Cocktail image</string>
     <string name="title_update">Update</string>
     <string name="title_detail">Cocktail</string>
     <string name="strong_label">Strong</string>
@@ -19,19 +18,8 @@
     <string name="not_fav">Not favorite</string>
     <string name="search_label">Search</string>
     <string name="search_action">Search</string>
-    <string name="text">Mix Mix Mix Mix Mix Mix</string>
-    <string name="big_text">In large saucepan, beat together eggs, sugar and salt, if desired.
-        Stir in 2 cups of the milk. Cook over low heat, stirring constantly, until mixture is
-        thick enough to coat a metal spoon and reaches 160 degrees F. Remove from heat.
-        Stir in remaining 2 cups milk and vanilla. Cover and regfigerate until thoroughly chilled,
-        several hours or overnight. Just before serving, pour into bowl or pitcher.
-        Garnish or add stir-ins, if desired. Choose 1 or several of: Chocolate curls, cinnamon
-        sticks, extracts of flavorings, flavored brandy or liqueur, fruit juice or nectar,
-        ground nutmeg, maraschino cherries, orange slices, peppermint sticks or candy canes,
-        plain brandy, run or whiskey, sherbet or ice-cream, whipping cream, whipped.
-        Serve immediately.</string>
+    <string name="text">Cocktail</string>
     <string name="widget_text">Cocktail</string>
     <string name="add_widget">Add widget</string>
-
 </resources>
 

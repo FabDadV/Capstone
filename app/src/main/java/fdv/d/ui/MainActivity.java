@@ -1,11 +1,14 @@
 package fdv.d.ui;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +22,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
         ButterKnife.bind(this);
 
         Log.d("TAG", "onCreate");
+        // Check network connection
+        checkOnline();
 //        recyclerView = findViewById(R.id.rv_list);
         int numberOfColumns = calculateColumns(this);
         // Set the gridLayoutManager on recyclerView
@@ -151,5 +157,45 @@ public class MainActivity extends AppCompatActivity implements ListAdapter.ItemC
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         return (int) (dpWidth / DEFAULT_SIZE);
+    }
+    // Check network connection
+    // https://stackoverflow.com/questions/23292728/how-to-perform-asynctask-for-checking-internet-connection
+    private void checkOnline() {
+        new OnlineAsyncTask().execute();
+    }
+    // Create a class that extends AsyncTask to check Inrenet connection
+    public class OnlineAsyncTask extends AsyncTask<String, Void, Boolean> {
+        // Override the doInBackground method to perform your network requests
+        @Override
+        protected Boolean doInBackground(String... params) {
+            Boolean result = false;
+            HttpURLConnection con = null;
+            try {
+                con = (HttpURLConnection) new URL("http://www.google.com/").openConnection();
+                con.setRequestMethod("HEAD");
+                result = (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+                Log.d("TAG", "Http:" + String.valueOf(result));
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (con != null) {
+                    try {
+                        con.disconnect();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            Log.d("TAG", "Http:" + String.valueOf(result));
+            return result;
+        }
+        // Override the onPostExecute method to display the results of the network request
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (!result) {
+                Toast.makeText(getApplicationContext(),
+                        "NO Internet connection!", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
