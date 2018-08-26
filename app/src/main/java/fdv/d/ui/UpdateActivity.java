@@ -84,8 +84,6 @@ public class UpdateActivity extends AppCompatActivity {
         Log.d("TAG", "Put: " + drink.getStrDrink() + " 1: " + drink.getStrIngredient1());
         inflateIngredients(drink);
         idDrink = drink.getIdDrink();
-//        updateIngredients();
-//        updateFav();
         Picasso.get()
                 .load(drink.getStrDrinkThumb())
                 .placeholder(R.drawable.no_drink)
