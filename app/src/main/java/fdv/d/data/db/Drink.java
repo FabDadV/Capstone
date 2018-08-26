@@ -2,14 +2,18 @@ package fdv.d.data.db;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "tab_drinks")
-public class Drink {
+public class Drink implements Parcelable {
 /*
     @PrimaryKey(autoGenerate = true)
     private int id;
 */
+    public Drink() {}
+
     @PrimaryKey
     @NonNull
     private String idDrink;
@@ -54,18 +58,6 @@ public class Drink {
     private String strMeasure14;
     private String strMeasure15;
 
-    // @return The Id
-/*
-    public int getId() { return id; }
-    // @param Id
-    public void setId(int id) { this.id = id; }
-    // id for own cocktail
-    public int getIdCock() { return idCock; }
-    public void setIdCock(int idCock) { this.idCock = idCock; }
-    // Cocktail's version
-    public int getVersion() { return version; }
-    public void setVersion(int version) { this.version = version; }
-*/
     /* @return The IdDrink */
     public String getIdDrink() { return idDrink; }
     /* @param IdDrink */
@@ -184,5 +176,45 @@ public class Drink {
 
     public String getStrMeasure15() {return strMeasure15;}
     public void setStrMeasure15(String strMeasure15) {this.strMeasure15 = strMeasure15;}
-}
 
+    private Drink(Parcel in) {
+        in.readStringArray(new String[]{this.idDrink, this.strDrink, this.strDrinkThumb,
+                this.strCategory, this.strIBA, this.strAlcoholic, this.strInstructions, this.dateModified,
+                strIngredient1, this.strIngredient2, this.strIngredient3, this.strIngredient4,
+                this.strIngredient5, this.strIngredient6, this.strIngredient7, this.strIngredient8,
+                strIngredient9, this.strIngredient10, this.strIngredient11, this.strIngredient12,
+                this.strIngredient13, this.strIngredient14, this.strIngredient15,
+                strMeasure1, this.strMeasure2, this.strMeasure3, this.strMeasure4,
+                this.strMeasure5, this.strMeasure6, this.strMeasure7, this.strMeasure8,
+                strMeasure9, this.strMeasure10, this.strMeasure11, this.strMeasure12,
+                this.strMeasure13, this.strMeasure14, this.strMeasure15});
+    }
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeStringArray(new String[]{idDrink, strDrink, strDrinkThumb, strCategory,
+                strIBA, strAlcoholic, strInstructions, dateModified,
+                strIngredient1, strIngredient2, strIngredient3, strIngredient4,
+                strIngredient5, strIngredient6, strIngredient7, strIngredient8,
+                strIngredient9, strIngredient10, strIngredient11, strIngredient12,
+                strIngredient13, strIngredient14, strIngredient15,
+                strMeasure1, strMeasure2, strMeasure3, strMeasure4,
+                strMeasure5, strMeasure6, strMeasure7, strMeasure8,
+                strMeasure9, strMeasure10, strMeasure11, strMeasure12,
+                strMeasure13, strMeasure14, strMeasure15});
+    }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    // Creator for Parcelable object
+    public static final Parcelable.Creator<Drink> CREATOR = new Parcelable.Creator<Drink>() {
+            @Override
+            public Drink createFromParcel(Parcel parcel) {
+                return new Drink(parcel);
+            }
+            @Override
+            public Drink[] newArray(int size) {
+                return new Drink[size];
+            }
+        };
+}

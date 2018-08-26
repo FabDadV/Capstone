@@ -79,6 +79,7 @@ public class DetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                saveFav();
                 Intent updateIntent = new Intent(DetailActivity.this, UpdateActivity.class);
                 // Pass the data to the UpdateActivity
                 updateIntent.putExtra(EXTRA_ID_DRINK, drink.getIdDrink());

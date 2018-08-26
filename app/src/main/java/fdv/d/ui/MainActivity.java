@@ -41,7 +41,7 @@ import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
 
 public class MainActivity extends AppCompatActivity implements ListAdapter.ItemClickListener {
-    private static final int DEFAULT_SIZE = 240;
+    private static final int DEFAULT_SIZE = 180;
     private ListViewModel viewModel;
     private List<Drink> list;
     private ListAdapter.ItemClickListener listener;
