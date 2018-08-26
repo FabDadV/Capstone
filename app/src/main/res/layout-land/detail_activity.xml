@@ -26,7 +26,6 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <LinearLayout
-                android:id="@+id/title_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -35,19 +34,274 @@
 
                 <ImageView
                     android:id="@+id/iv_drink"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/image_height"
                     android:layout_gravity="start"
-                    android:layout_weight="50"
+                    android:layout_weight="1"
                     android:contentDescription="@string/tv_thumb"
                     app:srcCompat="@drawable/no_drink" />
-
-                <TextView
-                    android:id="@+id/tv_ings"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_weight="7"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_ing1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing7"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tv_mes1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_ing9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_ing15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:textColor="@color/colorSecondDark"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:paddingStart="@dimen/padding"
+                    android:paddingLeft="@dimen/padding"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_mes9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_mes15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -81,15 +335,14 @@
                 android:paddingEnd="@dimen/padding"
                 android:paddingStart="@dimen/padding"
                 android:text="@string/tv_name"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/title_size" />
 
             <TextView
                 android:id="@+id/tv_cat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="@dimen/padding"
-                android:paddingStart="@dimen/padding"
-                android:textSize="@dimen/text_size" />
+                android:paddingStart="@dimen/padding"/>
 
             <TextView
                 android:id="@+id/tv_text"
@@ -103,17 +356,18 @@
                 android:id="@+id/adView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 ads:adSize="SMART_BANNER "
-                ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/edit_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/ic_edit" />

@@ -85,6 +85,7 @@ public class UpdateActivity extends AppCompatActivity {
         drink = getIntent().getParcelableExtra(EXTRA_DRINK);
         Log.d("TAG", "Put: " + drink.getStrDrink() + " 1: " + drink.getStrIngredient1());
         inflateIngredients(drink);
+        idDrink = drink.getIdDrink();
 //        updateIngredients();
 //        updateFav();
         Picasso.get()
@@ -186,13 +187,12 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
         Utils.addDelay(1000);
-        Log.d("TAG", "list?");
-        if(list==null) {
+        int k = list.size();
+        if(k==0) {
             ver = i*100 + 1;
             newDrink  = name + "   v.01";
             return;
         }else {
-            int k = list.size();
             int m = Integer.valueOf(list.get(k - 1));
             ver = m > 1000000 ? (m + 1) : (m * 100 + 1);
             if(i > 1000000) {

@@ -50,8 +50,8 @@ public class DrinkWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
         Resources resources = context.getResources();
-        String name = resources.getString(R.string.tv_name);
-        String text = resources.getString(R.string.ing_label);
+        String name = resources.getString(R.string.widget_text);
+        String text = "";
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, name, text, appWidgetId);
         }

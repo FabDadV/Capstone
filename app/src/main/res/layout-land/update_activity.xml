@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.27" />
+        app:layout_constraintGuide_percent="0.27"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/gl_horizontal"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toStartOf="@+id/gl_vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/no_drink" />
+        app:srcCompat="@drawable/no_drink"/>
 
     <TextView
         android:id="@+id/tv_drink"
