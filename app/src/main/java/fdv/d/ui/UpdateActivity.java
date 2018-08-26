@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import com.squareup.picasso.Picasso;
 
-import fdv.d.utils.Ingredients;
+import fdv.d.utils.Utils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,6 +29,7 @@ import static fdv.d.App.appDB;
 import static fdv.d.App.appExecutors;
 import static fdv.d.App.drinkType;
 import static fdv.d.App.FAVORITE;
+import static fdv.d.ui.DetailActivity.EXTRA_DRINK;
 import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
 import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
@@ -81,13 +82,13 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.update_activity);
         ButterKnife.bind(this);
 
-        idDrink = getIntent().getStringExtra(EXTRA_ID_DRINK);
-        String pathDrink = getIntent().getStringExtra(EXTRA_PATH);
-        updateIngredients();
+        drink = getIntent().getParcelableExtra(EXTRA_DRINK);
+        Log.d("TAG", "Put: " + drink.getStrDrink() + " 1: " + drink.getStrIngredient1());
+        inflateIngredients(drink);
+//        updateIngredients();
 //        updateFav();
-
         Picasso.get()
-                .load(pathDrink)
+                .load(drink.getStrDrinkThumb())
                 .placeholder(R.drawable.no_drink)
                 .error(R.drawable.err_drink)
                 .into(drinkView);
@@ -105,13 +106,14 @@ public class UpdateActivity extends AppCompatActivity {
                         }
                     });
                 }
-                Ingredients.addDelay(2000);
+                Utils.addDelay(2000);
                 finish();
             }
         });
     }
     // Obtain Cocktail's detail information from internet by id:
     // https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
+/*
     public void updateIngredients() {
         if(drinkType.equals(FAVORITE)) {
             appExecutors.diskIO().execute(new Runnable() {
@@ -120,7 +122,7 @@ public class UpdateActivity extends AppCompatActivity {
                     drink = appDB.drinkDao().getByIdDrink(idDrink);
                 }
             });
-            Ingredients.addDelay(1000);
+            Utils.addDelay(1000);
             tvDrink.setText(drink.getStrDrink());
             tvCategory.setText(drink.getStrCategory());
             tvInstruction.setText(drink.getStrInstructions());
@@ -146,10 +148,11 @@ public class UpdateActivity extends AppCompatActivity {
                     Log.e("TAG", "API Error: " + t.toString());
                 }
             });
-            Ingredients.addDelay(4000);
+            Utils.addDelay(4000);
             Log.d("TAG", "ApiDrink: " + drink.getStrDrink());
         }
     }
+*/
     // Check in drink with id is favorite
     private boolean checkIsFav() {
 
@@ -182,7 +185,7 @@ public class UpdateActivity extends AppCompatActivity {
                 list = appDB.drinkDao().getListIdDrink(s + "%");
             }
         });
-        Ingredients.addDelay(1000);
+        Utils.addDelay(1000);
         Log.d("TAG", "list?");
         if(list==null) {
             ver = i*100 + 1;
@@ -204,7 +207,10 @@ public class UpdateActivity extends AppCompatActivity {
     }
     // Inflate ingredients information
     private void inflateIngredients(Drink drink) {
-        Log.d("TAG"," inflate Ings" + drink.getStrIngredient1());
+        Log.d("TAG","inflate Up " + drink.getStrDrink());
+        tvDrink.setText(drink.getStrDrink());
+        tvCategory.setText(drink.getStrCategory());
+        tvInstruction.setText(drink.getStrInstructions());
         Resources resources = this.getResources();
         int color = resources.getColor(R.color.colorPrimaryLight);
         Log.d("TAG"," inflate Ings" + drink.getStrIngredient1());

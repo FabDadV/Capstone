@@ -63,15 +63,13 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/padding"
         android:paddingEnd="@dimen/padding"
-        android:text="@string/text"
         app:layout_constraintTop_toBottomOf="@+id/h_barrier"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/update_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_margin="@dimen/margin"
         app:layout_constraintBottom_toTopOf="@+id/tv_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_save"/>

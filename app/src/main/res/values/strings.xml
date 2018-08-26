@@ -19,7 +19,7 @@
     <string name="search_label">Search</string>
     <string name="search_action">Search</string>
     <string name="text">Cocktail</string>
-    <string name="widget_text">Cocktail</string>
+    <string name="widget_text">Home Cocktails</string>
     <string name="add_widget">Add widget</string>
 </resources>
 

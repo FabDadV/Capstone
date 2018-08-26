@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6"/>
+        app:layout_constraintGuide_percent="0.5"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/gl_horizontal"
@@ -33,13 +33,6 @@
         app:srcCompat="@drawable/no_drink"/>
 
     <TextView
-        android:id="@+id/tv_ings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"
-        app:layout_constraintStart_toEndOf="@+id/gl_vertical"/>
-
-    <TextView
         android:id="@+id/tv_drink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,6 +42,7 @@
         android:text="@string/tv_name"
         android:textSize="@dimen/text_size"
         app:layout_constraintTop_toBottomOf="@+id/gl_horizontal"/>
+    <!-- app:layout_constraintTop_toBottomOf="@+id/iv_update"/> -->
 
     <TextView
         android:id="@+id/tv_cat"
@@ -58,13 +52,29 @@
         android:paddingEnd="@dimen/padding"
         app:layout_constraintTop_toBottomOf="@id/tv_drink"/>
 
+    <android.support.constraint.Barrier
+        android:id="@+id/h_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tv_cat, tv_ing15, tv_mes15"/>
+
     <TextView
         android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/padding"
         android:paddingEnd="@dimen/padding"
-        app:layout_constraintTop_toBottomOf="@id/tv_cat"/>
+        app:layout_constraintTop_toBottomOf="@+id/h_barrier"/>
+    <!-- app:layout_constraintTop_toBottomOf="@id/tv_cat"/> -->
+
+    <android.support.constraint.Barrier
+        android:id="@+id/v_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="tv_ing1,tv_ing2,tv_ing3,tv_ing3,tv_ing4,tv_ing5,tv_ing6
+        ,tv_ing7,tv_ing8,tv_ing9,tv_ing10,tv_ing11,tv_ing12,tv_ing13,tv_ing14,tv_ing15"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/edit_fab"
@@ -74,6 +84,361 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_edit"/>
+
+    <TextView
+        android:id="@+id/tv_ing1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes1"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"/>
+
+    <TextView
+        android:id="@+id/tv_ing2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes2"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing1"/>
+
+    <TextView
+        android:id="@+id/tv_ing3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes3"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing2"/>
+
+    <TextView
+        android:id="@+id/tv_ing4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes4"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing3"/>
+
+    <TextView
+        android:id="@+id/tv_ing5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes5"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing4"/>
+
+    <TextView
+        android:id="@+id/tv_ing6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes6"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing5"/>
+
+    <TextView
+        android:id="@+id/tv_ing7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes7"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing6"/>
+
+    <TextView
+        android:id="@+id/tv_ing8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes8"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing7"/>
+
+    <TextView
+        android:id="@+id/tv_ing9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes9"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing8"/>
+
+    <TextView
+        android:id="@+id/tv_ing10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes10"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing9"/>
+
+    <TextView
+        android:id="@+id/tv_ing11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes11"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing10"/>
+
+    <TextView
+        android:id="@+id/tv_ing12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes12"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing11"/>
+
+    <TextView
+        android:id="@+id/tv_ing13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes13"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing12"/>
+
+    <TextView
+        android:id="@+id/tv_ing14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes14"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing13"/>
+
+    <TextView
+        android:id="@+id/tv_ing15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/ing_label"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mes15"
+        app:layout_constraintStart_toEndOf="@+id/gl_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing14"/>
+
+    <TextView
+        android:id="@+id/tv_mes1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_mes2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes1"/>
+
+    <TextView
+        android:id="@+id/tv_mes3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes2"/>
+
+    <TextView
+        android:id="@+id/tv_mes4"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes3"/>
+
+    <TextView
+        android:id="@+id/tv_mes5"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes4"/>
+
+    <TextView
+        android:id="@+id/tv_mes6"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes5"/>
+
+    <TextView
+        android:id="@+id/tv_mes7"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes6"/>
+
+    <TextView
+        android:id="@+id/tv_mes8"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes7"/>
+
+    <TextView
+        android:id="@+id/tv_mes9"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes8"/>
+
+    <TextView
+        android:id="@+id/tv_mes10"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes9"/>
+
+    <TextView
+        android:id="@+id/tv_mes11"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes10"/>
+
+    <TextView
+        android:id="@+id/tv_mes12"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes11"/>
+
+    <TextView
+        android:id="@+id/tv_mes13"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes12"/>
+
+    <TextView
+        android:id="@+id/tv_mes14"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes13"/>
+
+    <TextView
+        android:id="@+id/tv_mes15"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:hint="@string/mes_label"
+        android:inputType="text"
+        android:textSize="@dimen/text_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/v_barrier"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mes14"/>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

@@ -3,7 +3,7 @@ package fdv.d.utils;
 import android.util.Log;
 import fdv.d.data.db.Drink;
 
-public class Ingredients {
+public class Utils {
 
     public static String getIngregientsList(Drink drink) {
         String s = new String();
