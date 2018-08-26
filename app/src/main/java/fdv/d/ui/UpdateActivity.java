@@ -30,8 +30,6 @@ import static fdv.d.App.appExecutors;
 import static fdv.d.App.drinkType;
 import static fdv.d.App.FAVORITE;
 import static fdv.d.ui.DetailActivity.EXTRA_DRINK;
-import static fdv.d.ui.DetailActivity.EXTRA_ID_DRINK;
-import static fdv.d.ui.DetailActivity.EXTRA_PATH;
 
 public class UpdateActivity extends AppCompatActivity {
 
